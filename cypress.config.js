@@ -2,13 +2,11 @@ const { defineConfig } = require("cypress");
 
 const ENV = process.env.ENV || 'dev';
 
- // URL e credenciais de acesso para os ambientes de desenvolvimento e produção
 const urls = {
-  dev: '',
-  prod: ''
+  dev: 'https://hmax-api-hub-dev.web.app/#/',
+  prod: 'https://supergerente.hmax.com.br/#/'
 };
 
- // Credenciais de acesso para os ambientes de desenvolvimento e produção 
 const users = {
   dev: {
     username: '',

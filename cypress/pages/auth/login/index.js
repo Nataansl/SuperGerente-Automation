@@ -2,26 +2,26 @@ import { elements as el } from "./elements";
 
 class Login {
   visitarPaginaLoginPR() {
-    cy.visit("");
+    cy.visit("https://supergerente.hmax.com.br/#/");
   }
 
 visitarPaginaLoginDEV() {
-    cy.visit("");
+    cy.visit("https://hmax-api-hub-dev.web.app/#/");
   }
   
    // Credencia de Produção
    // Preenche as credenciais válidas para ambiente de produção (Essas informações pode ser adicionado no .env.example).  
   preencherCredenciaisValidas(email, senha) {
-    cy.get(el.emailInput).type('Cypress.env.usernamePR');
-    cy.get(el.passwordInput).type("Cypress.env.passwordPR");
+    cy.get(el.emailInput).type('');
+    cy.get(el.passwordInput).type("");
     cy.get(el.loginButton).click();
   }
 
   // Credencia de Desenvolvimento 
    // Preenche as credenciais válidas para ambiente de produção (Essas informações pode ser adicionado no .env.example).
  preencherCredenciasValidarDV(email, senha) { 
-    cy.get(el.emailInput).type('Cypress.env.username');
-    cy.get(el.passwordInput).type('Cypress.env.password');
+    cy.get(el.emailInput).type('');
+    cy.get(el.passwordInput).type('');
     cy.get(el.loginButton).click();
  }
 
