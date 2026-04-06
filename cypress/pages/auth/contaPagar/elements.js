@@ -1,5 +1,4 @@
 export const elements = {
-
   // URL
   urlPR: "https://supergerente.hmax.com.br/#/",
   urlDV: "https://hmax-api-hub-dev.web.app/#/",
@@ -77,7 +76,6 @@ export const elements = {
   inputDataFrequencia: "#frequencyDate",
   toggleRecorrencia: 'input[name="recurringReleases"]',
 
-  
   // Observação
   abaDetalhes: "Detalhes",
   inputObservacao: "#observation",
@@ -93,7 +91,7 @@ export const elements = {
   // Dropdown
   selectListbox: '[role="listbox"]',
 
- // Verificação de Mensagem (Toast PrimeNG)
+  // Verificação de Mensagem (Toast PrimeNG)
   NotificationTitle: '[data-pc-section="summary"]',
-  NotificationMessage: '[data-pc-section="detail"]', 
+  NotificationMessage: '[data-pc-section="detail"]',
 };

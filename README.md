@@ -28,9 +28,6 @@ cypress/
 ```
 
 ---
-
-## 🧪 Cobertura de testes
-
 ### 🔐 Autenticação
 
 * Login
@@ -52,24 +49,10 @@ cypress/
 
 ---
 
-## ⚙️ Instalação
-
-Clone o repositório:
+## ⚙️ Clone o repositório:
 
 ```
-git clone https://github.com/Nataansl/SuperGerente.git
-```
-
-Acesse a pasta:
-
-```
-cd SuperGerente
-```
-
-Instale as dependências:
-
-```
-npm install
+git clone https://github.com/hmaxsoftware/hmax-tester.git
 ```
 
 ---
@@ -143,14 +126,6 @@ cypress/reports/
 * Separação por domínio de negócio
 * Testes independentes
 * Organização escalável
-
----
-
-## 🚀 Próximos passos
-
-* Integração com CI/CD (GitHub Actions)
-* Execução paralela de testes
-* Testes de API com Cypress
 
 ---
 

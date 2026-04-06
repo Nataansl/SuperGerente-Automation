@@ -1,5 +1,5 @@
 import contaPagar from "../../../pages/auth/contaPagar";
-import Login from "../../../pages/auth/Login";
+import Login from "../../../pages/auth/login";
 import inventory from "../../../pages/inventory";
 
 describe("Cadastros Conta Pagar", () => {
@@ -7,13 +7,16 @@ describe("Cadastros Conta Pagar", () => {
   beforeEach(() => {
     cy.viewport(1280, 858);
     contaPagar.visitarPaginaLogin();
-    Login.preencherCredenciasValidarDV;
-    contaPagar.selecionarPropriedadeDEV();
+    Login.visitarPaginaLoginDEV();
+    Login.preencherCredenciasValidarDV();
     
-    // Produção (Selecionar Propriedade)
+        // Desevolvimento (Selecionar Propriedade)
+    //contaPagar.selecionarPropriedadeDEV();
+
+        // Produção (Selecionar Propriedade)
     // categoria.selecionarPropriedade();
-    
-    // Produção (Login)
+
+       // Produção (Login)
     // Login.preencherCredenciaisValidas();
   });
 
@@ -28,8 +31,21 @@ describe("Cadastros Conta Pagar", () => {
     cy.url().should("include", "/financeiro/contas-pagar");
   });
 
+
+  // Verificar Categoria Duplicada
+   ("Verificar Categoria Duplicada", () => {
+    // Act (Agir/Executar)
+    contaPagar.selecionarModuloPagar();
+    contaPagar.novoLancamentoPagar();
+    contaPagar.verificarCategoria();
+
+    // Assert (Verificar/Validar)
+    cy.url().should("include", "/financeiro/contas-pagar");
+  });
+
+
   // Cadastrar Categoria (TodaRede)
-  it("Cadastrar Categoria (TodaRede)", () => {
+  it.only("Cadastrar Categoria (TodaRede)", () => {
     // Act (Agir/Executar)
     contaPagar.selecionarModuloPagar();
     contaPagar.novoLancamentoPagar();
@@ -44,7 +60,7 @@ describe("Cadastros Conta Pagar", () => {
     // Act (Agir/Executar)
     contaPagar.selecionarModuloPagar();
     contaPagar.novoLancamentoPagar();
-    contaPagar.cadastrarCategoriaTD();
+    contaPagar.verificarCategoria();
 
     // Assert (Verificar/Validar)
     cy.url().should("include", "/financeiro/contas-pagar");

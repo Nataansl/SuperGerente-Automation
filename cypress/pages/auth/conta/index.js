@@ -18,31 +18,29 @@ class Conta {
 
   // Seleciona a propriedade produção
   selecionarPropriedade() {
-    cy.get(el.selectCliente, { timeout: 10000 })
-      .should("be.visible")
-      .click();
+    cy.get(el.selectCliente, { timeout: 10000 }).should("be.visible").click();
 
-    cy.contains(el.opcaoPropriedade, "Teste PNatan", { timeout: 10000 })
-      .click();
+    cy.contains(el.opcaoPropriedade, "Teste PNatan", {
+      timeout: 10000,
+    }).click();
 
     cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
       .should("not.be.disabled")
       .click();
   }
 
- // Selecionar a propriedade DEV 
+  // Selecionar a propriedade DEV
   selecionarPropriedadeDEV() {
-    cy.get(el.selectCliente, { timeout: 10000 })
-      .should("be.visible")
-      .click();
+    cy.get(el.selectCliente, { timeout: 10000 }).should("be.visible").click();
 
-    cy.contains(el.opcaoPropriedade, "HOTEL_CENTRAL_DEV", { timeout: 10000 })
-      .click();
+    cy.contains(el.opcaoPropriedade, "HOTEL_CENTRAL_DEV", {
+      timeout: 10000,
+    }).click();
 
     cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
       .should("not.be.disabled")
       .click();
- }
+  }
 
   // Navega até o módulo de Centro de Custo
   selecionarConta() {
@@ -51,7 +49,7 @@ class Conta {
       .click();
 
     cy.contains("a", /^Contas$/).click();
-  }     
+  }
 
   // Edita uma conta existente com base no nome informado
   editarConta(nome) {
@@ -61,10 +59,7 @@ class Conta {
       .click();
 
     // Atualiza a descrição da categoria
-    cy.get(el.inputNome)
-      .should("be.visible")
-      .clear()
-      .type("Teste Categoria");
+    cy.get(el.inputNome).should("be.visible").clear().type("Teste Conta11");
 
     this.salvar();
   }
@@ -75,7 +70,7 @@ class Conta {
       .should("be.visible")
       .click();
 
-    cy.get(el.inputNome).should("be.visible").type("Teste Conta");
+    cy.get(el.inputNome).should("be.visible").type("Teste Conta1");
     cy.get(el.inputBankCode).type("100");
     cy.get(el.inputBankName).type("Teste Conta");
     cy.get(el.inputAgency).type("1234-5");

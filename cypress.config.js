@@ -9,12 +9,12 @@ const urls = {
 
 const users = {
   dev: {
-    username: '',
-    password: ''
+    username: 'LOGIN DESENVOLVIMENTO',
+    password: 'SENHA DESENVOLVIMENTO'
   },
   prod: {
-    username: '',
-    password: ''
+    username: 'LOGIN PRODUÇÃO',
+    password: 'SENHA PRODUÇÃO'
   }
 };
 

@@ -1,14 +1,13 @@
 import { elements as el } from "./elements";
 
 class contatos {
-
   visitarPaginaLoginPR() {
     cy.visit(el.urlPR);
   }
 
   visitarPaginaLoginST() {
-   cy.visit(el.urlDV)
-  } 
+    cy.visit(el.urlDV);
+  }
 
   // Paginação
   paginatorContatos() {
@@ -22,31 +21,29 @@ class contatos {
 
   // Seleciona a propriedade produção
   selecionarPropriedade() {
-    cy.get(el.selectCliente, { timeout: 10000 })
-      .should("be.visible")
-      .click();
+    cy.get(el.selectCliente, { timeout: 10000 }).should("be.visible").click();
 
-    cy.contains(el.opcaoPropriedade, "Teste PNatan", { timeout: 10000 })
-      .click();
+    cy.contains(el.opcaoPropriedade, "Teste PNatan", {
+      timeout: 10000,
+    }).click();
 
     cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
       .should("not.be.disabled")
       .click();
   }
 
- // Selecionar a propriedade DEV 
+  // Selecionar a propriedade DEV
   selecionarPropriedadeDEV() {
-    cy.get(el.selectCliente, { timeout: 10000 })
-      .should("be.visible")
-      .click();
+    cy.get(el.selectCliente, { timeout: 10000 }).should("be.visible").click();
 
-    cy.contains(el.opcaoPropriedade, "HOTEL_CENTRAL_DEV", { timeout: 10000 })
-      .click();
+    cy.contains(el.opcaoPropriedade, "HOTEL_CENTRAL_DEV", {
+      timeout: 10000,
+    }).click();
 
     cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
       .should("not.be.disabled")
       .click();
- }
+  }
 
   // Menu
   selecionarContatos() {
@@ -69,9 +66,7 @@ class contatos {
     cy.get(el.inputEmail).type("teste@gmail.com.br");
     cy.get(el.inputEndereco).type("Rua Cordeiro de Deus");
 
-    cy.contains(el.botaoSalvar, "Salvar")
-      .should("not.be.disabled")
-      .click();
+    cy.contains(el.botaoSalvar, "Salvar").should("not.be.disabled").click();
   }
 
   // Editar contato
@@ -81,13 +76,9 @@ class contatos {
       .closest("button")
       .click();
 
-    cy.get(el.inputNome)
-      .should("be.visible")
-      .type("ESTHER");
+    cy.get(el.inputNome).should("be.visible").type("ESTHER");
 
-    cy.contains(el.botaoSalvar, "Salvar")
-      .should("not.be.disabled")
-      .click();
+    cy.contains(el.botaoSalvar, "Salvar").should("not.be.disabled").click();
   }
 
   // Nova conta
@@ -102,9 +93,7 @@ class contatos {
     cy.get(el.inputAgency).type("1234-5");
     cy.get(el.inputAccount).type("123456-7");
 
-    cy.contains(el.botaoSalvar, "Salvar")
-      .should("not.be.disabled")
-      .click();
+    cy.contains(el.botaoSalvar, "Salvar").should("not.be.disabled").click();
   }
 
   // Excluir contato

@@ -1,5 +1,4 @@
 export const elements = {
-  
   // URL
   urlPR: "https://supergerente.hmax.com.br/#/",
   urlDV: "https://hmax-api-hub-dev.web.app/#/",
@@ -32,6 +31,6 @@ export const elements = {
   colunaTabela: "td",
 
   // Ações
-  botaoEditarIcon: '.pi-pen-to-square',
-  botaoExcluir: '.pi-pen-to-square', 
+  botaoEditarIcon: ".pi-pen-to-square",
+  botaoExcluir: ".pi-pen-to-square",
 };

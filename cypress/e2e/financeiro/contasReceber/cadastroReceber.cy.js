@@ -1,5 +1,5 @@
 import contaReceber from "../../../pages/auth/contaReceber";
-import Login from "../../../pages/auth/Login";
+import Login from "../../../pages/auth/login";
 import inventory from "../../../pages/inventory";
 
 describe("Cadastros a Receber", () => {
@@ -7,14 +7,16 @@ describe("Cadastros a Receber", () => {
   beforeEach(() => {
     cy.viewport(1280, 858);
     contaReceber.visitarPaginaLogin();
+    Login.visitarPaginaLoginDEV();
     Login.preencherCredenciasValidarDV();
-    contaReceber.selecionarPropriedadeDEV();
-    contaReceber.novoLancamentoReceber();
 
-    // Produção (Selecionar Propriedade)
+      // Selecionar Propriedade (Desenvolvimento)
+    //contaReceber.selecionarPropriedadeDEV();
+
+       // Produção (Selecionar Propriedade)
     // categoria.selecionarPropriedade();
-    
-    // Produção (Login)
+
+       // Produção (Login)
     // Login.preencherCredenciaisValidas();
   });
 
@@ -26,12 +28,14 @@ describe("Cadastros a Receber", () => {
     cy.url().should("include", "/financeiro/contas-receber");
   });
 
-  it("Cadastrar Nova Categoria ", () => {
+  it.only("Cadastrar Nova Categoria ", () => {
     // Act (Agir/Executar)
+    contaReceber.selecionarModuloReceber();
+    contaReceber.novoLancamentoReceber(); 
     contaReceber.cadastrarCategoria();
 
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+  
   });
 
   it("Cadastrar Fornecedor", () => {

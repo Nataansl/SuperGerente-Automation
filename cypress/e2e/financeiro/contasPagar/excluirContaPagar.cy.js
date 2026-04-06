@@ -1,5 +1,5 @@
 import contaPagar from "../../../pages/auth/contaPagar";
-import Login from "../../../pages/auth/Login";
+import Login from "../../../pages/auth/login";
 import inventory from "../../../pages/inventory";
 
 describe("Excluir Conta Pagar", () => {
@@ -7,33 +7,38 @@ describe("Excluir Conta Pagar", () => {
   beforeEach(() => {
     cy.viewport(1280, 858);
     contaPagar.visitarPaginaLogin();
-    Login.preencherCredenciasValidarDV;
-    // Produção (Utilizado)
+    Login.visitarPaginaLoginDEV();
+    Login.preencherCredenciasValidarDV();
+      
+        // Desevolvimento (Selecionar Propriedade)
+    //contaPagar.selecionarPropriedadeDEV();
+
+        // Produção (Selecionar Propriedade)
+    // categoria.selecionarPropriedade();
+
+       // Produção (Login)
     // Login.preencherCredenciaisValidas();
-    //Produção
-    //contaPagar.selecionarPropriedade();
-    contaPagar.selecionarPropriedadeDEV();
   });
 
-  // Na Classe EcluirLancamento pode informar o titulo para ser selecionado.
+  // Na Classe EcluirLancamento pode informar o nome do Titulo para excluir. 
   // Excluir Lançamento
   it("Excluir Lancamento", () => {
     // Act (Agir/Executar)
     contaPagar.selecionarModuloPagar();
     contaPagar.paginatorContaPagar();
-    contaPagar.excluirLancamento("DUPLICATAS A PAGAR");
+    contaPagar.excluirLancamento("");
 
     // Assert
     cy.url().should("include", "/financeiro/contas-pagar");
   });
 
-  // Na Classe EcluirLancamento pode informar o titulo para ser selecionado.
   // Excluir Lançamento (Pago)
   it("Excluir Lancamento", () => {
     // Act (Agir/Executar)
     contaPagar.selecionarModuloPagar();
     contaPagar.paginatorContaPagar();
 
+    // Na Classe EcluirLancamento pode informar o nome do Titulo para excluir.  
     // Excluir Lançamento Pago
     contaPagar.excluirLancamentoPago("ANTECIPACAO CONTA 20754 (01)");
 

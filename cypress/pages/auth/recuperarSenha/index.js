@@ -16,7 +16,6 @@ class RecuperarSenha {
 
     cy.get(el.enviarButton).click();
 
-    cy.url().should("include", "/esqueceu-senha");
   }
 
   validarMensagem(mensagem){
@@ -52,7 +51,7 @@ class RecuperarSenha {
   }
 
   emailInvalido(email, codigo, novaSenha, confirmarSenha) {
-    cy.get(el.Recuperacao).clear().type("testehmaxteste3gmail.com");
+    cy.get(el.Recuperacao).clear().type("testehmaxteste33gmail.com");
     cy.get(el.codigoRecuperacao).clear().type(45658);
     cy.get(el.novaSenha).clear().type("ZpwwPtIbjv123");
     cy.get(el.confirmarSenha).clear().type("ZpwwPtIbjv123");

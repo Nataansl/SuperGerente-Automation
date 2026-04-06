@@ -5,54 +5,54 @@ class Login {
     cy.visit("https://supergerente.hmax.com.br/#/");
   }
 
-visitarPaginaLoginDEV() {
+  visitarPaginaLoginDEV() {
     cy.visit("https://hmax-api-hub-dev.web.app/#/");
   }
-  
-   // Credencia de Produção
-   // Preenche as credenciais válidas para ambiente de produção (Essas informações pode ser adicionado no .env.example).  
+
+  // Credencia do ambiente de Produção
+  // Preenche as credenciais válidas para ambiente de produção (Essas informações pode ser adicionado no .env.example).
   preencherCredenciaisValidas(email, senha) {
-    cy.get(el.emailInput).type('');
-    cy.get(el.passwordInput).type("");
+    cy.get(el.emailInput).type("LOGIN PRODUÇÃO");
+    cy.get(el.passwordInput).type("SENHA PRODUÇÃO");
     cy.get(el.loginButton).click();
   }
 
-  // Credencia de Desenvolvimento 
-   // Preenche as credenciais válidas para ambiente de produção (Essas informações pode ser adicionado no .env.example).
- preencherCredenciasValidarDV(email, senha) { 
-    cy.get(el.emailInput).type('');
-    cy.get(el.passwordInput).type('');
+  // Credencia do ambiente de Desenvolvimento
+  // Preenche as credenciais válidas para ambiente de produção (Essas informações pode ser adicionado no .env.example).
+  preencherCredenciasValidarDV(email, senha) {
+    cy.get(el.emailInput).type("LOGIN DESENVOLVIMENTO");
+    cy.get(el.passwordInput).type("SENHA DESENVOLVIMENTO");
     cy.get(el.loginButton).click();
- }
+  }
 
   // Seleciona a propriedade produção
   selecionarPropriedade() {
-    cy.get(el.selectCliente, { timeout: 10000 })
-      .should("be.visible")
-      .click();
+    cy.get(el.selectCliente, { timeout: 10000 }).should("be.visible").click();
 
-    cy.contains(el.opcaoPropriedade, "Teste PNatan", { timeout: 10000 })
-      .click();
+    cy.contains(el.opcaoPropriedade, "Teste PNatan", {
+      timeout: 10000,
+    }).click();
 
     cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
       .should("not.be.disabled")
       .click();
   }
 
- // Selecionar a propriedade DEV 
+  // Selecionar a propriedade DEV
   selecionarPropriedadeDEV() {
-    cy.get(el.selectCliente, { timeout: 10000 })
-      .should("be.visible")
-      .click();
+    cy.get(el.selectCliente, { timeout: 10000 }).should("be.visible").click();
 
-    cy.contains(el.opcaoPropriedade, "HOTEL_CENTRAL_DEV", { timeout: 10000 })
-      .click();
+    cy.contains(el.opcaoPropriedade, "HOTEL_CENTRAL_DEV", {
+      timeout: 10000,
+    }).click();
 
     cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
       .should("not.be.disabled")
       .click();
- }
+  }
 
+  // Credenciais inválidas (Email ou senha incorretos) 
+  // TASK (): Criar função para gerar email e senha aleatórios.
   preencherCredenciaisInvalidas(email, senha) {
     cy.get(el.emailInput).type("user.invalid@gmail.com");
     cy.get(el.passwordInput).type("12345678");
@@ -68,8 +68,8 @@ visitarPaginaLoginDEV() {
   }
 
   loginComCamposVazios() {
-    cy.get(el.emailInput).should("be.empty");
-    cy.get(el.passwordInput).should("be.empty");
+    cy.get(el.emailInput).should("be.visible").clear();
+    cy.get(el.passwordInput).should("be.visible").clear();
     cy.get(el.loginButton).click();
   }
 

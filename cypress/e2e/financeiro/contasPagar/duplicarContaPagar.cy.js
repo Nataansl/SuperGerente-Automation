@@ -1,5 +1,5 @@
 import contaPagar from "../../../pages/auth/contaPagar";
-import Login from "../../../pages/auth/Login";
+import Login from "../../../pages/auth/login";
 import inventory from "../../../pages/inventory";
 
 describe("Duplicar o Lancamento (APagar) ", () => {
@@ -7,13 +7,16 @@ describe("Duplicar o Lancamento (APagar) ", () => {
   beforeEach(() => {
     cy.viewport(1280, 858);
     contaPagar.visitarPaginaLogin();
-    Login.preencherCredenciasValidarDV;
-    contaPagar.selecionarPropriedadeDEV();
+    Login.visitarPaginaLoginDEV();
+    Login.preencherCredenciasValidarDV();
+       
+         // Desevolvimento (Selecionar Propriedade)
+    //contaPagar.selecionarPropriedadeDEV();
 
-    // Produção (Selecionar Propriedade)
+        // Produção (Selecionar Propriedade)
     // categoria.selecionarPropriedade();
 
-    // Produção (Login)
+       // Produção (Login)
     // Login.preencherCredenciaisValidas();
   });
 
@@ -21,7 +24,7 @@ describe("Duplicar o Lancamento (APagar) ", () => {
   it("Duplicar Lancamento", () => {
     // Act (Agir/Executar)
     contaPagar.selecionarModuloPagar();
-    contaPagar.duplicarLancamento("");
+    contaPagar.duplicarLancamento("Receber Antecipação");
 
     // Assert
     cy.url().should("include", "/financeiro/contas-pagar");

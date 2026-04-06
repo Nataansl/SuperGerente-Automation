@@ -1,5 +1,5 @@
 import categoria from "../../../pages/auth/categoria";
-import Login from "../../../pages/auth/Login";
+import Login from "../../../pages/auth/login";
 import inventory from "../../../pages/inventory";
 
 describe("Editar Categoria", () => {
@@ -7,22 +7,25 @@ describe("Editar Categoria", () => {
   beforeEach(() => {
     cy.viewport(1280, 858);
     categoria.visitarPaginaLogin();
-    Login.preencherCredenciasValidarDV;
-    categoria.selecionarPropriedadeDEV();
+    Login.visitarPaginaLoginDEV();
+    Login.preencherCredenciasValidarDV();
+        
+        // Selecionar Propriedade (Desenvolvimento)
+    //categoria.selecionarPropriedadeDEV();
 
-    // Produção (Selecionar Propriedade)
+       // Produção (Selecionar Propriedade)
     // categoria.selecionarPropriedade();
 
-    // Produção (Login)
+        // Produção (Login)
     // Login.preencherCredenciaisValidas();
   });
 
+    // No campo editarCategoria pode informar o nome da categoria existente e o novo nome.
   it("Editar Categoria", () => {
     // Act (Agir/Executar)
-    inventory.acessarCategoria();
     categoria.selecionarCategoria();
     categoria.paginatorCategoria();
-    categoria.editarCategoria("Teste Categoria");
+    categoria.editarCategoria("Teste Cateegoria");
 
     // Assert
     cy.url().should("include", "/financeiro/categoria-financeiro");

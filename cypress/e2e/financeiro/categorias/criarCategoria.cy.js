@@ -1,34 +1,36 @@
 import categoria from "../../../pages/auth/categoria";
-import Login from "../../../pages/auth/Login";
+import Login from "../../../pages/auth/login";
 import inventory from "../../../pages/inventory";
 
 describe("Criar Categoria", () => {
   // Executa antes de cada teste
   beforeEach(() => {
-    cy.viewport(1280, 858);
+    cy.viewport(1300, 858);
     categoria.visitarPaginaLogin();
-    Login.preencherCredenciasValidarDV;
-    categoria.selecionarPropriedadeDEV();
+    Login.visitarPaginaLoginDEV();
+    Login.preencherCredenciasValidarDV();
+    categoria.selecionarCategoria();
+       
+      // Selecionar Propriedade (Desenvolvimento)
+    //categoria.selecionarPropriedadeDEV();
 
-    // Produção (Selecionar Propriedade)
+       // Produção (Selecionar Propriedade)
     // categoria.selecionarPropriedade();
 
-    // Produção (Login)
+        // Produção (Login)
     // Login.preencherCredenciaisValidas();
   });
 
   it("Categoria Duplicada", () => {
     // Act (Agir/Executar)
-    categoria.selecionarCategoria();
     categoria.categoriaDuplicada();
 
     // Assert
     cy.url().should("include", "/financeiro/categoria-financeiro");
   });
 
-  it.only("Nova Categoria", () => {
+  it("Nova Categoria", () => {
     // Act (Agir/Executar)
-    categoria.selecionarCategoria();
     categoria.novaCategoria();
 
     // Assert

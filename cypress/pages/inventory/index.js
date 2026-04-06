@@ -11,6 +11,10 @@ class Inventory {
     cy.visit("https://supergerente.hmax.com.br/#/esqueceu-senha");
   }
 
+  validarResetarSenha(email) {
+    cy.visit("https://supergerente.hmax.com.br/#/resetar-senha");
+  }
+
   validarContaPagar() {
     cy.visit("https://supergerente.hmax.com.br/#/financeiro/contas-pagar");
   }

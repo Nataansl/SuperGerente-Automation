@@ -1,5 +1,5 @@
 import categoria from "../../../pages/auth/categoria";
-import Login from "../../../pages/auth/Login";
+import Login from "../../../pages/auth/login";
 import inventory from "../../../pages/inventory";
 
 describe("Excluir Categoria", () => {
@@ -7,16 +7,20 @@ describe("Excluir Categoria", () => {
   beforeEach(() => {
     cy.viewport(1280, 858);
     categoria.visitarPaginaLogin();
-    Login.preencherCredenciasValidarDV;
-    categoria.selecionarPropriedadeDEV();
+    Login.visitarPaginaLoginDEV();
+    Login.preencherCredenciasValidarDV();
+       
+        // Selecionar Propriedade (Desenvolvimento)
+    //categoria.selecionarPropriedadeDEV();
 
-    // Produção (Selecionar Propriedade)
+       // Produção (Selecionar Propriedade)
     // categoria.selecionarPropriedade();
 
-    // Produção (Login)
+        // Produção (Login)
     // Login.preencherCredenciaisValidas();
   });
 
+    // No campo excluirCategoria pode informar o nome da categoria existente.
   it("Excluir Conta", () => {
     // Act (Agir/Executar)
     categoria.selecionarCategoria();

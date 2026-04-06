@@ -1,5 +1,5 @@
 import contatos from "../../../pages/auth/contatos";
-import Login from "../../../pages/auth/Login";
+import Login from "../../../pages/auth/login";
 import inventory from "../../../pages/inventory";
 
 describe("Excluir Contato", () => {
@@ -7,13 +7,16 @@ describe("Excluir Contato", () => {
   beforeEach(() => {
     cy.viewport(1280, 858);
     contatos.visitarPaginaLoginST();
-    Login.preencherCredenciasValidarDV;
-    contatos.selecionarPropriedadeDEV();
+    Login.visitarPaginaLoginDEV();
+    Login.preencherCredenciasValidarDV();
+       
+       // Selecionar Propriedade (Desenvolvimento)
+     //contatos.selecionarPropriedadeDEV();
 
-    // Produção (Selecionar Propriedade)
+       // Produção (Selecionar Propriedade)
     // categoria.selecionarPropriedade();
-    
-    // Produção (Login)
+
+       // Produção (Login)
     // Login.preencherCredenciaisValidas();
   });
 

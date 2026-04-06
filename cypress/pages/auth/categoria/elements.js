@@ -1,5 +1,4 @@
 export const elements = {
-
   // URL
   urlPR: "https://supergerente.hmax.com.br/#/",
   urlDV: "https://hmax-api-hub-dev.web.app/#/",
@@ -11,7 +10,7 @@ export const elements = {
 
   // Menu
   menuFinanceiro: ".p-panelmenu-header-label",
-  menuCategoria: "Categoria",
+  menuCategoria: "Categorias",
 
   // Paginação
   paginatorDropdown: ".p-paginator-rpp-dropdown",
@@ -29,11 +28,10 @@ export const elements = {
   linhaTabela: "tr",
 
   // Ações
-  botaoEditarIcon: '.pi-pen-to-square',
-  botaoExcluir: '.pi-pen-to-square',
+  botaoEditarIcon: ".pi-pen-to-square",
+  botaoExcluir: ".pi-pen-to-square",
 
-// Verificação de Mensagem (Toast PrimeNG)
+  // Verificação de Mensagem (Toast PrimeNG)
   NotificationTitle: '[data-pc-section="summary"]',
-  NotificationMessage: '[data-pc-section="detail"]', 
-
+  NotificationMessage: '[data-pc-section="detail"]',
 };

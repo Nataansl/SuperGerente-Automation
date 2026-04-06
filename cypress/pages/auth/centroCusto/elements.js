@@ -1,5 +1,4 @@
 export const elements = {
-
   // URL
   urlPR: "https://supergerente.hmax.com.br/#/",
   urlDV: "https://hmax-api-hub-dev.web.app/#/",
@@ -31,9 +30,8 @@ export const elements = {
   // Ações
   botaoEditar: ".pi-pen-to-square",
   botaoExcluir: ".pi-trash",
- 
+
   // Verificação de Mensagem (Toast PrimeNG)
   NotificationTitle: '[data-pc-section="summary"]',
-  NotificationMessage: '[data-pc-section="detail"]', 
-
+  NotificationMessage: '[data-pc-section="detail"]',
 };

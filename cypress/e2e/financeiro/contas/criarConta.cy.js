@@ -1,5 +1,5 @@
 import conta from "../../../pages/auth/conta";
-import Login from "../../../pages/auth/Login";
+import Login from "../../../pages/auth/login";
 import inventory from "../../../pages/inventory";
 
 describe("Criar Conta", () => {
@@ -7,19 +7,24 @@ describe("Criar Conta", () => {
   beforeEach(() => {
     cy.viewport(1280, 858);
     conta.visitarPaginaLogin();
-    Login.preencherCredenciasValidarDV;
-    conta.selecionarPropriedadeDEV();
-
-    // Produção (Selecionar Propriedade)
-    // categoria.selecionarPropriedade();
+    Login.visitarPaginaLoginDEV();
+    Login.preencherCredenciasValidarDV();
     
-    // Produção (Login)
+        // Desevolvimento (Selecionar Propriedade)
+    //conta.selecionarPropriedadeDEV();
+
+        // Produção (Selecionar Propriedade)
+    // conta.selecionarPropriedade();
+
+       // Produção (Login)
     // Login.preencherCredenciaisValidas();
   });
 
   it("Criar Conta", () => {
     // Act (Agir/Executar)
+    //conta.selecionarCategoria();
     conta.selecionarConta();
+    conta.novaConta();
 
     // Assert
     cy.url().should("include", "/financeiro/contas-bancaria");

@@ -1,39 +1,37 @@
 import { elements as el } from "./elements";
-import { dayjs as el } from "dayjs";
+
 
 class ContaReceber {
- // Acessa a aplicação pelo link principal
-   visitarPaginaLogin() {
-     cy.visit(el.urlDV);
-   }
+  // Acessa a aplicação pelo link principal
+  visitarPaginaLogin() {
+    cy.visit(el.urlDV);
+  }
 
   // Seleciona a propriedade produção
   selecionarPropriedade() {
-    cy.get(el.selectCliente, { timeout: 10000 })
-      .should("be.visible")
-      .click();
+    cy.get(el.selectCliente, { timeout: 10000 }).should("be.visible").click();
 
-    cy.contains(el.opcaoPropriedade, "Teste PNatan", { timeout: 10000 })
-      .click();
+    cy.contains(el.opcaoPropriedade, "Teste PNatan", {
+      timeout: 10000,
+    }).click();
 
     cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
       .should("not.be.disabled")
       .click();
   }
 
- // Selecionar a propriedade DEV 
+  // Selecionar a propriedade DEV
   selecionarPropriedadeDEV() {
-    cy.get(el.selectCliente, { timeout: 10000 })
-      .should("be.visible")
-      .click();
+    cy.get(el.selectCliente, { timeout: 10000 }).should("be.visible").click();
 
-    cy.contains(el.opcaoPropriedade, "HOTEL_CENTRAL_DEV", { timeout: 10000 })
-      .click();
+    cy.contains(el.opcaoPropriedade, "HOTEL_CENTRAL_DEV", {
+      timeout: 10000,
+    }).click();
 
     cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
       .should("not.be.disabled")
       .click();
- }
+  }
 
   // Selecionar o Modulo Receber
   selecionarModuloReceber() {
@@ -93,18 +91,14 @@ class ContaReceber {
     this.salvar();
   }
 
-  // Cadastrar nova categoria
-  cadastrarCategoria() {
-    cy.get(el.botaoCadastrarCategoria).click();
-
-    cy.get(el.inputDescricaoCategoria).should("be.visible").type("TESTE59");
-
-    cy.selectPrime(el.selectCategoriaPai, "GERAL");
-
-    cy.get(el.checkboxCategoriaTodasEmpresas).click();
-
-    cy.contains(el.botaoSalvar, "Salvar").should("not.be.disabled").click();
-  }
+  // Cadastra uma nova categoria financeira
+    cadastrarCategoria() {
+      cy.get(el.botaoCadastrarCategoria).click();
+  
+      cy.get(el.inputDescricaoCategoria).should("be.visible").type("TESTE");
+  
+      this.salvar();
+    }
 
   // Verificar a notificação
   verificarNotificacao(titulo, mensagem) {

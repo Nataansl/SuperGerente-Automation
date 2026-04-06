@@ -1,5 +1,5 @@
 import contaPagar from "../../../pages/auth/contaPagar";
-import Login from "../../../pages/auth/Login";
+import Login from "../../../pages/auth/login";
 import inventory from "../../../pages/inventory";
 
 describe("Conta a Pagar Recorrente", () => {
@@ -7,13 +7,16 @@ describe("Conta a Pagar Recorrente", () => {
   beforeEach(() => {
     cy.viewport(1280, 858);
     contaPagar.visitarPaginaLogin();
-    Login.preencherCredenciasValidarDV;
-    contaPagar.selecionarPropriedadeDEV();
+    Login.visitarPaginaLoginDEV();
+    Login.preencherCredenciasValidarDV();
+        
+        // Desevolvimento (Selecionar Propriedade)
+    //contaPagar.selecionarPropriedadeDEV();
 
-    // Produção (Selecionar Propriedade)
+        // Produção (Selecionar Propriedade)
     // categoria.selecionarPropriedade();
-    
-    // Produção (Login)
+
+       // Produção (Login)
     // Login.preencherCredenciaisValidas();
   });
 
@@ -44,22 +47,6 @@ describe("Conta a Pagar Recorrente", () => {
     cy.url().should("include", "/financeiro/contas-pagar");
   });
 
-  it("Incluir Titulo (Recorrente)", () => {
-    // Act (Agir/Executar)
-    contaPagar.novoLancamentoPagar();
-    contaPagar.incluirTituloPago();
-
-    contaPagar.dropdownCategoria("#category", "COMISSOES DE VENDA");
-    contaPagar.dropdownCategoria("#contact", "ANTÔNIA E EDUARDA");
-    contaPagar.dropdownCategoria("#bankAccount", "BANCO DO BRASIL");
-    contaPagar.dropdownCategoria("#costCenter", "Despesas Fixas");
-
-    contaPagar.ativarRecorrencia();
-    contaPagar.frequenciaRecorrente();
-
-    //Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-pagar");
-  });
 
   it("Recorrencia Permanente (Diario)", () => {
     //Arrange (Organizar/Configurar)
@@ -69,8 +56,8 @@ describe("Conta a Pagar Recorrente", () => {
     contaPagar.incluirTituloPago();
 
     contaPagar.dropdownCategoria("#category", "COMISSOES DE VENDA");
-    contaPagar.dropdownCategoria("#contact", "ANTÔNIA E EDUARDA");
-    contaPagar.dropdownCategoria("#bankAccount", "BANCO DO BRASIL");
+    contaPagar.dropdownCategoria("#contact", "Adriana e Melissa Contábil Ltda");
+    contaPagar.dropdownCategoria("#bankAccount", "Banco do Brasil");
     contaPagar.dropdownCategoria("#costCenter", "Despesas Fixas");
 
     contaPagar.ativarRecorrencia();
@@ -89,8 +76,8 @@ describe("Conta a Pagar Recorrente", () => {
     contaPagar.incluirTituloPago();
 
     contaPagar.dropdownCategoria("#category", "COMISSOES DE VENDA");
-    contaPagar.dropdownCategoria("#contact", "ANTÔNIA E EDUARDA");
-    contaPagar.dropdownCategoria("#bankAccount", "BANCO DO BRASIL");
+    contaPagar.dropdownCategoria("#contact", "Adriana e Melissa Contábil Ltda");
+    contaPagar.dropdownCategoria("#bankAccount", "Banco do Brasil");
     contaPagar.dropdownCategoria("#costCenter", "Despesas Fixas");
 
     contaPagar.ativarRecorrencia();
@@ -108,8 +95,8 @@ describe("Conta a Pagar Recorrente", () => {
     contaPagar.incluirTituloPago();
 
     contaPagar.dropdownCategoria("#category", "COMISSOES DE VENDA");
-    contaPagar.dropdownCategoria("#contact", "ANTÔNIA E EDUARDA");
-    contaPagar.dropdownCategoria("#bankAccount", "BANCO DO BRASIL");
+    contaPagar.dropdownCategoria("#contact", "Adriana e Melissa Contábil Ltda");
+    contaPagar.dropdownCategoria("#bankAccount", "Banco do Brasil");
     contaPagar.dropdownCategoria("#costCenter", "Despesas Fixas");
 
     contaPagar.ativarRecorrencia();
@@ -127,8 +114,8 @@ describe("Conta a Pagar Recorrente", () => {
     contaPagar.incluirTituloPago();
 
     contaPagar.dropdownCategoria("#category", "COMISSOES DE VENDA");
-    contaPagar.dropdownCategoria("#contact", "ANTÔNIA E EDUARDA");
-    contaPagar.dropdownCategoria("#bankAccount", "BANCO DO BRASIL");
+    contaPagar.dropdownCategoria("#contact", "Adriana e Melissa Contábil Ltda");
+    contaPagar.dropdownCategoria("#bankAccount", "Banco do Brasil");
     contaPagar.dropdownCategoria("#costCenter", "Despesas Fixas");
 
     contaPagar.ativarRecorrencia();

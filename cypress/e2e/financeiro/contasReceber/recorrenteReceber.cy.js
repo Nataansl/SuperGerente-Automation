@@ -1,5 +1,5 @@
 import contaReceber from "../../../pages/auth/contaReceber";
-import Login from "../../../pages/auth/Login";
+import Login from "../../../pages/auth/login";
 import inventory from "../../../pages/inventory";
 
 describe("Conta a Receber Recorrente", () => {
@@ -7,14 +7,16 @@ describe("Conta a Receber Recorrente", () => {
   beforeEach(() => {
     cy.viewport(1280, 858);
     contaReceber.visitarPaginaLogin();
+    Login.visitarPaginaLoginDEV();
     Login.preencherCredenciasValidarDV();
-    contaReceber.selecionarPropriedadeDEV();
-    contaReceber.novoLancamentoReceber();
 
-    // Produção (Selecionar Propriedade)
+        // Selecionar Propriedade (Desenvolvimento)
+    //contaReceber.selecionarPropriedadeDEV();
+
+       // Produção (Selecionar Propriedade)
     // categoria.selecionarPropriedade();
-    
-    // Produção (Login)
+
+       // Produção (Login)
     // Login.preencherCredenciaisValidas();
   });
 

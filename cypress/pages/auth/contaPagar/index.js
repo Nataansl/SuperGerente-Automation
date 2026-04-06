@@ -6,32 +6,30 @@ class ContaPagar {
     cy.visit(el.urlDV);
   }
 
-   // Seleciona a propriedade produção
-   selecionarPropriedade() {
-     cy.get(el.selectCliente, { timeout: 10000 })
-       .should("be.visible")
-       .click();
- 
-     cy.contains(el.opcaoPropriedade, "Teste PNatan", { timeout: 10000 })
-       .click();
- 
-     cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
-       .should("not.be.disabled")
-       .click();
-   }
- 
-  // Selecionar a propriedade DEV 
-   selecionarPropriedadeDEV() {
-     cy.get(el.selectCliente, { timeout: 10000 })
-       .should("be.visible")
-       .click();
- 
-     cy.contains(el.opcaoPropriedade, "HOTEL_CENTRAL_DEV", { timeout: 10000 })
-       .click();
- 
-     cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
-       .should("not.be.disabled")
-       .click();
+  // Seleciona a propriedade produção
+  selecionarPropriedade() {
+    cy.get(el.selectCliente, { timeout: 10000 }).should("be.visible").click();
+
+    cy.contains(el.opcaoPropriedade, "Teste PNatan", {
+      timeout: 10000,
+    }).click();
+
+    cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
+      .should("not.be.disabled")
+      .click();
+  }
+
+  // Selecionar a propriedade DEV
+  selecionarPropriedadeDEV() {
+    cy.get(el.selectCliente, { timeout: 10000 }).should("be.visible").click();
+
+    cy.contains(el.opcaoPropriedade, "HOTEL_CENTRAL_DEV", {
+      timeout: 10000,
+    }).click();
+
+    cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
+      .should("not.be.disabled")
+      .click();
   }
 
   // Navega até o módulo de Contas a Pagar dentro do menu Financeiro
@@ -77,23 +75,21 @@ class ContaPagar {
   cadastrarCategoriaTD() {
     cy.get(el.botaoCadastrarCategoria).click();
 
-    cy.get(el.inputDescricaoCategoria).should("be.visible").type("TESTE98");
+    cy.get(el.inputDescricaoCategoria).should("be.visible").type("TESTE99");
 
     // Autocomplete correto
-    cy.get(el.selectCategoriaPai).should("be.visible").clear().type("ENER");
+    cy.get(el.selectCategoriaPai).should("be.visible").clear().type("TESTE");
 
     cy.get("body", { timeout: 10000 })
-      .contains(".p-autocomplete-option", "ENERGIA ELETRICA")
+      .contains(".p-autocomplete-option", "TESTE98")
       .should("be.visible")
       .click();
-
-    cy.get(el.checkboxCategoriaTodasEmpresas).click();
 
     this.salvar();
   }
 
   // Verificar Registro Duplicado
-  cadastrarCategoria() {
+  verificarCategoria() {
     cy.get(el.botaoCadastrarCategoria).click();
 
     cy.get(el.inputDescricaoCategoria).should("be.visible").type("TESTE98");
@@ -309,14 +305,6 @@ class ContaPagar {
     cy.get(el.inputDescricao).type(nome);
 
     this.salvar();
-
-    cy.contains("Apenas a parcela", { timeout: 10000 }).should("be.visible");
-
-    cy.contains("Alterar apenas este lançamento", { timeout: 10000 })
-      .should("be.visible")
-      .click();
-
-    this.Confimar();
   }
 
   // Ativa a recorrência de um lançamento
@@ -368,7 +356,7 @@ class ContaPagar {
 
     cy.get(el.selectListbox).should("be.visible");
 
-    cy.contains(el.opcaoPropriedade, opcao).click();
+    cy.contains(el.opcaoPropriedade, opcao).click(); 
   }
 
   // Parcelamento
@@ -387,12 +375,12 @@ class ContaPagar {
   }
 
   // Ação padrão para salvar formulários
-    salvar() {
-  cy.contains('button', 'Salvar', { timeout: 10000 })
-    .should('be.visible')
-    .and('not.be.disabled')
-    .click();
-}
+  salvar() {
+    cy.contains("button", "Salvar", { timeout: 10000 })
+      .should("be.visible")
+      .and("not.be.disabled")
+      .click();
+  }
 
   // Acão padrão para Confirmar
   Confimar() {

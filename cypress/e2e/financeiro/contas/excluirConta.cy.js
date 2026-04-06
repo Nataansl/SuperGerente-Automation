@@ -1,5 +1,5 @@
 import conta from "../../../pages/auth/conta";
-import Login from "../../../pages/auth/Login";
+import Login from "../../../pages/auth/login";
 import inventory from "../../../pages/inventory";
 
 describe("Excluir Conta", () => {
@@ -7,22 +7,25 @@ describe("Excluir Conta", () => {
   beforeEach(() => {
     cy.viewport(1280, 858);
     conta.visitarPaginaLogin();
-    Login.preencherCredenciasValidarDV;
-    conta.selecionarPropriedadeDEV();
+    Login.visitarPaginaLoginDEV();
+    Login.preencherCredenciasValidarDV();
+    
+       // Desevolvimento (Selecionar Propriedade)
+    //conta.selecionarPropriedadeDEV();
 
-    // Produção (Selecionar Propriedade)
-    // categoria.selecionarPropriedade();
+       // Produção (Selecionar Propriedade)
+    // conta.selecionarPropriedade();
 
-    // Produção (Login)
+       // Produção (Login)
     // Login.preencherCredenciaisValidas();
   });
 
+  // No campo (excluirConta), insira o nome da conta que deseja excluir, por exemplo: "Sicredi"
   it("Excluir Conta", () => {
     // Act (Agir/Executar)
     conta.selecionarConta();
     conta.paginatorConta();
-
-    conta.excluirConta("Sicredi");
+    conta.excluirConta("Teste Conta11");
 
     // Assert
     cy.url().should("include", "/financeiro/contas-bancaria");

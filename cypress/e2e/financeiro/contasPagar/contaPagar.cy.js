@@ -1,5 +1,5 @@
 import contaPagar from "../../../pages/auth/contaPagar";
-import Login from "../../../pages/auth/Login";
+import Login from "../../../pages/auth/login";
 import inventory from "../../../pages/inventory";
 
 describe("Conta a Pagar", () => {
@@ -7,13 +7,16 @@ describe("Conta a Pagar", () => {
   beforeEach(() => {
     cy.viewport(1280, 858);
     contaPagar.visitarPaginaLogin();
-    Login.preencherCredenciasValidarDV;
-    contaPagar.selecionarPropriedadeDEV();
+    Login.visitarPaginaLoginDEV();
+    Login.preencherCredenciasValidarDV();
+    
+         // Desevolvimento (Selecionar Propriedade)
+    //contaPagar.selecionarPropriedadeDEV();
 
-    // Produção (Selecionar Propriedade)
+        // Produção (Selecionar Propriedade)
     // categoria.selecionarPropriedade();
 
-    // Produção (Login)
+       // Produção (Login)
     // Login.preencherCredenciaisValidas();
   });
 
@@ -33,8 +36,8 @@ describe("Conta a Pagar", () => {
     contaPagar.incluirTituloPago();
 
     contaPagar.dropdownCategoria("#category", "COMISSOES DE VENDA");
-    contaPagar.dropdownCategoria("#contact", "ANTÔNIA E EDUARDA");
-    contaPagar.dropdownCategoria("#bankAccount", "BANCO DO BRASIL");
+    contaPagar.dropdownCategoria("#contact", "Adriana e Melissa Contábil Ltda");
+    contaPagar.dropdownCategoria("#bankAccount", "Banco do Brasil");
     contaPagar.dropdownCategoria("#costCenter", "Despesas Fixas");
 
     contaPagar.salvar();
@@ -52,8 +55,8 @@ describe("Conta a Pagar", () => {
     contaPagar.incluirTituloPago();
 
     contaPagar.dropdownCategoria("#category", "COMISSOES DE VENDA");
-    contaPagar.dropdownCategoria("#contact", "ANTÔNIA E EDUARDA");
-    contaPagar.dropdownCategoria("#bankAccount", "BANCO DO BRASIL");
+    contaPagar.dropdownCategoria("#contact", "Adriana e Melissa Contábil Ltda");
+    contaPagar.dropdownCategoria("#bankAccount", "Banco do Brasil");
     contaPagar.dropdownCategoria("#costCenter", "Despesas Fixas");
 
     contaPagar.salvar();
@@ -71,7 +74,7 @@ describe("Conta a Pagar", () => {
     contaPagar.incluirTituloPago();
 
     contaPagar.dropdownCategoria("#category", "COMISSOES DE VENDA");
-    contaPagar.dropdownCategoria("#bankAccount", "BANCO DO BRASIL");
+    contaPagar.dropdownCategoria("#bankAccount", "Banco do Brasil");
 
     contaPagar.selecionarParcelamento();
 
@@ -88,7 +91,7 @@ describe("Conta a Pagar", () => {
     contaPagar.incluirTituloPago();
 
     contaPagar.dropdownCategoria("#category", "COMISSOES DE VENDA");
-    contaPagar.dropdownCategoria("#bankAccount", "BANCO DO BRASIL");
+    contaPagar.dropdownCategoria("#bankAccount", "Banco do Brasil");
 
     contaPagar.observacaoTituloPagar();
 

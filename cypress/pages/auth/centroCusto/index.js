@@ -1,7 +1,6 @@
 import { elements as el } from "./elements";
 
 class CentroCusto {
-
   // Acessa a aplicação
   visitarPaginaLogin() {
     cy.visit(el.urlDV);
@@ -19,32 +18,29 @@ class CentroCusto {
 
   // Seleciona a propriedade produção
   selecionarPropriedade() {
-    cy.get(el.selectCliente, { timeout: 10000 })
-      .should("be.visible")
-      .click();
+    cy.get(el.selectCliente, { timeout: 10000 }).should("be.visible").click();
 
-    cy.contains(el.opcaoPropriedade, "Teste PNatan", { timeout: 10000 })
-      .click();
+    cy.contains(el.opcaoPropriedade, "Teste PNatan", {
+      timeout: 10000,
+    }).click();
 
     cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
       .should("not.be.disabled")
       .click();
   }
 
- // Selecionar a propriedade DEV 
+  // Selecionar a propriedade DEV
   selecionarPropriedadeDEV() {
-    cy.get(el.selectCliente, { timeout: 10000 })
-      .should("be.visible")
-      .click();
+    cy.get(el.selectCliente, { timeout: 10000 }).should("be.visible").click();
 
-    cy.contains(el.opcaoPropriedade, "HOTEL_CENTRAL_DEV", { timeout: 10000 })
-      .click();
+    cy.contains(el.opcaoPropriedade, "HOTEL_CENTRAL_DEV", {
+      timeout: 10000,
+    }).click();
 
     cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
       .should("not.be.disabled")
       .click();
- }
-
+  }
 
   // Navega até o módulo de Centro de Custo
   selecionarCentroCusto() {
@@ -65,43 +61,35 @@ class CentroCusto {
       .click();
 
     // Atualiza o nome do centro de custo
-    cy.get(el.inputNome)
-      .should("be.visible")
-      .clear()
-      .type("Teste Categoriaa");
+    cy.get(el.inputNome).should("be.visible").clear().type("Teste Centro de Custo");
 
     this.salvar();
   }
 
-  // centro de custo duplicado
+  // No campo Type e atualiza para um novo nome. No campo .type pode informar o nome da categoria existente e o novo nome. 
   CentroCustoDuplicado() {
-    cy.contains(el.botaoAdicionarCentroCusto, { timeout: 10000 })
-      .click();
+    cy.contains(el.botaoAdicionarCentroCusto, { timeout: 10000 }).click();
 
-    cy.get(el.inputNome).type("MarketingT");
+    cy.get(el.inputNome).type("Teste Centro de Custo");
 
     this.salvar();
-  
-    cy.get(el.NotificationTitle)
-          .should("be.visible")
-          .and("contain", "Atenção");
-    
-        cy.get(el.NotificationMessage, { timeout: 10000 })
+
+    cy.get(el.NotificationTitle).should("be.visible").and("contain", "Atenção");
+
+    cy.get(el.NotificationMessage, { timeout: 10000 })
       .should("be.visible")
       .and("contain", "Já existe um centro de custo com esse nome.");
-      }
+  }
 
-   // Novo Centro de Custo 
-   // Type pode informar o nome do Centro de Custo
-    novoCentroCusto() {
-    cy.contains(el.botaoAdicionarCentroCusto, { timeout: 10000 })
-      .click();
+  // Novo Centro de Custo
+  // Type pode informar o nome do Centro de Custo
+  novoCentroCusto() {
+    cy.contains(el.botaoAdicionarCentroCusto, { timeout: 10000 }).click();
 
-    cy.get(el.inputNome).type("");
+    cy.get(el.inputNome).type("Teste Centro de Custo");
 
     this.salvar();
-  } 
-
+  }
 
   // Exclui um centro de custo com base no nome informado
   excluirCentroCusto(nome) {
@@ -115,9 +103,7 @@ class CentroCusto {
 
   // Ação padrão para salvar
   salvar() {
-    cy.contains(el.botaoSalvar, "Salvar")
-      .should("not.be.disabled")
-      .click();
+    cy.contains(el.botaoSalvar, "Salvar").should("not.be.disabled").click();
   }
 }
 

@@ -1,5 +1,5 @@
 import contaPagar from "../../../pages/auth/contaPagar";
-import Login from "../../../pages/auth/Login";
+import Login from "../../../pages/auth/login";
 import inventory from "../../../pages/inventory";
 
 describe("Editar conta a Pagar", () => {
@@ -7,21 +7,24 @@ describe("Editar conta a Pagar", () => {
   beforeEach(() => {
     cy.viewport(1280, 858);
     contaPagar.visitarPaginaLogin();
-    Login.preencherCredenciasValidarDV;
-    contaPagar.selecionarPropriedadeDEV();
+    Login.visitarPaginaLoginDEV();
+    Login.preencherCredenciasValidarDV();
+         
+        // Desevolvimento (Selecionar Propriedade)
+    //contaPagar.selecionarPropriedadeDEV();
 
-    // Produção (Selecionar Propriedade)
+        // Produção (Selecionar Propriedade)
     // categoria.selecionarPropriedade();
 
-    // Produção (Login)
+       // Produção (Login)
     // Login.preencherCredenciaisValidas();
   });
 
-  it("Reabrir Titulo", () => {
+  it.only("Reabrir Titulo", () => {
     // Act (Agir/Executar)
     contaPagar.selecionarModuloPagar();
     contaPagar.paginatorContaPagar;
-    contaPagar.reabrirTitulo("TESTE66");
+    contaPagar.reabrirTitulo("Receber AntecipaçãoReceber Antecipação");
 
     // Assert
     cy.url().should("include", "/financeiro/contas-pagar");
@@ -32,7 +35,7 @@ describe("Editar conta a Pagar", () => {
     // Act (Agir/Executar)
     contaPagar.selecionarModuloPagar();
     contaPagar.paginatorContaPagar();
-    contaPagar.editarLancamento();
+    contaPagar.editarLancamento("Receber Antecipação 55");
 
     // Assert
     cy.url().should("include", "/financeiro/contas-pagar");
