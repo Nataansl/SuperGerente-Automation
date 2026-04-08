@@ -25,7 +25,7 @@ describe("Conta a Receber", () => {
     contaReceber.novoLancamentoReceber();
 
     // Assert
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   it("Incluir Titulo A Receber", () => {
@@ -42,7 +42,7 @@ describe("Conta a Receber", () => {
 
     //Assert (Verificar/Validar)
 
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   it("Incluir Titulo A Receber (Pago)", () => {
@@ -58,7 +58,7 @@ describe("Conta a Receber", () => {
     contaReceber.botaoSalvar();
 
     //Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   it("Campos Obrigatorios", () => {
@@ -72,7 +72,7 @@ describe("Conta a Receber", () => {
     contaReceber.botaoSalvar();
 
     //Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   it("Parcelamento", () => {
@@ -88,7 +88,7 @@ describe("Conta a Receber", () => {
     contaReceber.botaoSalvar();
 
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   it("Observacao no Titulo", () => {
@@ -103,6 +103,6 @@ describe("Conta a Receber", () => {
     contaReceber.botaoSalvar();
 
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 });

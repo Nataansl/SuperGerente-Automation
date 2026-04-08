@@ -31,7 +31,7 @@ describe("Editar Receber", () => {
     contaReceber.botaoSalvar();
 
     // Assert
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   // Excluir apenas este lançamento (Recorrente)
@@ -43,7 +43,7 @@ describe("Editar Receber", () => {
     contaReceber.excluirRecorrente();
 
     // Assert
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   // Excluir este e os próximos (Recorrente)
@@ -56,7 +56,7 @@ describe("Editar Receber", () => {
     contaReceber.excluirEsteProximos();
 
     // Assert
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   // Excluir toda a recorrência  (Recorrente)
@@ -68,7 +68,7 @@ describe("Editar Receber", () => {
     contaReceber.excluirTodaRecorrencia();
 
     // Assert
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   // Excluir Lancamento (Parcelamento)
@@ -80,6 +80,6 @@ describe("Editar Receber", () => {
     contaReceber.excluirLancamento();
 
     // Assert
-    cy.url().should("include", "/financeiro/contas-receber");
+   inventory.validarContaReceber();
   });
 });

@@ -12,16 +12,16 @@ class Login {
   // Credencia do ambiente de Produção
   // Preenche as credenciais válidas para ambiente de produção (Essas informações pode ser adicionado no .env.example).
   preencherCredenciaisValidas(email, senha) {
-    cy.get(el.emailInput).type("LOGIN PRODUÇÃO");
-    cy.get(el.passwordInput).type("SENHA PRODUÇÃO");
+    cy.get(el.emailInput).type("");
+    cy.get(el.passwordInput).type("");
     cy.get(el.loginButton).click();
   }
 
   // Credencia do ambiente de Desenvolvimento
   // Preenche as credenciais válidas para ambiente de produção (Essas informações pode ser adicionado no .env.example).
   preencherCredenciasValidarDV(email, senha) {
-    cy.get(el.emailInput).type("LOGIN DESENVOLVIMENTO");
-    cy.get(el.passwordInput).type("SENHA DESENVOLVIMENTO");
+    cy.get(el.emailInput).type("");
+    cy.get(el.passwordInput).type("");
     cy.get(el.loginButton).click();
   }
 

@@ -19,6 +19,13 @@ class contatos {
       .click();
   }
 
+  // Pesquisa e já valida resultado
+  pesquisarEValidar(nome) {
+    this.pesquisarContato(nome);
+
+    cy.contains(el.linhaContato, nome, { timeout: 10000 }).should("be.visible");
+  }
+
   // Seleciona a propriedade produção
   selecionarPropriedade() {
     cy.get(el.selectCliente, { timeout: 10000 }).should("be.visible").click();
@@ -60,7 +67,7 @@ class contatos {
   adicionarContato() {
     cy.contains(el.botaoAdicionarContato, { timeout: 10000 }).click();
 
-    cy.get(el.inputNome).type("Teste03");
+    cy.get(el.inputNome).type("ACriado Contato");
     cy.get(el.inputDocumento).type("00.000.000/0000.58");
     cy.get(el.inputTelefone).type("47996598596");
     cy.get(el.inputEmail).type("teste@gmail.com.br");
@@ -69,42 +76,58 @@ class contatos {
     cy.contains(el.botaoSalvar, "Salvar").should("not.be.disabled").click();
   }
 
+  // Adicionar contato (Duplicado)
+  adicionarContatoDuplicado() {
+    cy.contains(el.botaoAdicionarContato, { timeout: 10000 }).click();
+
+    cy.get(el.inputNome).type("ACriado Contato");
+    cy.get(el.inputDocumento).type("00.000.000/0000.58");
+    cy.get(el.inputTelefone).type("47996598596");
+    cy.get(el.inputEmail).type("teste@gmail.com.br");
+    cy.get(el.inputEndereco).type("Rua Cordeiro de Deus");
+
+    cy.contains(el.botaoSalvar, "Salvar").should("not.be.disabled").click();
+
+    cy.get(el.NotificationTitle)
+      .should("be.visible")
+      .and("contain", "Erro ao salvar");
+
+    cy.get(el.NotificationMessage, { timeout: 10000 })
+      .should("be.visible")
+      .and("contain", "O CPF/CNPJ informado para este contato já existe.");
+    }
+
   // Editar contato
-  editarContatos() {
-    cy.contains(el.linhaContato, "ADRIANA ESTHER")
+  editarContatos(nomeAtual, novoNome) {
+    cy.contains(el.linhaContato, nomeAtual)
       .find(el.botaoEditar)
       .closest("button")
       .click();
 
-    cy.get(el.inputNome).should("be.visible").type("ESTHER");
-
-    cy.contains(el.botaoSalvar, "Salvar").should("not.be.disabled").click();
-  }
-
-  // Nova conta
-  novoContatos() {
-    cy.contains(el.botaoAdicionarConta, { timeout: 10000 })
-      .should("be.visible")
-      .click();
-
-    cy.get(el.inputNome).type("Teste Conta");
-    cy.get(el.inputBankCode).type("100");
-    cy.get(el.inputBankName).type("Teste Conta");
-    cy.get(el.inputAgency).type("1234-5");
-    cy.get(el.inputAccount).type("123456-7");
+    cy.get(el.inputNome).should("be.visible").clear().type(novoNome);
 
     cy.contains(el.botaoSalvar, "Salvar").should("not.be.disabled").click();
   }
 
   // Excluir contato
   excluirContatos() {
-    cy.contains(el.linhaContato, "ADRIANA ESTHER")
+    cy.contains(el.linhaContato, "Editado Contato")
       .find(el.botaoExcluir)
       .closest("button")
       .click();
 
     cy.contains(el.botaoConfirmar, "Confirmar").click();
   }
+
+  // Excluir Forncedor
+    excluirFornecedor() {
+     cy.contains(el.linhaContato, "AFornecedor Teste")
+      .find(el.botaoExcluir)
+      .closest("button")
+      .click();
+
+    cy.contains(el.botaoConfirmar, "Confirmar").click();
+    }
 }
 
 export default new contatos();

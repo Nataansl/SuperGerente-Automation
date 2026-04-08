@@ -1,9 +1,51 @@
 import { elements as el } from "./elements";
 
+function formatarData(data) {
+  const dia = String(data.getDate()).padStart(2, "0");
+  const mes = String(data.getMonth() + 1).padStart(2, "0");
+  const ano = data.getFullYear();
+
+  return `${dia}/${mes}/${ano}`;
+}
+
+function dataHoje() {
+  return formatarData(new Date());
+}
+
+function dataFutura(dias) {
+  const data = new Date();
+  data.setDate(data.getDate() + dias);
+  return formatarData(data);
+}
+
+function mesAnoFromDate(data) {
+  const mes = String(data.getMonth() + 1).padStart(2, "0");
+  const ano = String(data.getFullYear()).slice(-2);
+
+  return `${mes}/${ano}`;
+}
+
 class ContaPagar {
   // Acessa a aplicação pelo link principal
   visitarPaginaLogin() {
     cy.visit(el.urlDV);
+  }
+
+  selecionarPeriodo(mes, ano) {
+    // 1. Abrir o calendário (usa first por causa do ID duplicado)
+    cy.get("#icondisplay").first().click();
+
+    // 2. Espera o painel abrir
+    cy.get(".p-datepicker-panel").should("be.visible");
+
+    // 3. Ajustar o ano
+    cy.get(".p-datepicker-title").contains(ano).should("be.visible");
+
+    // Se precisar navegar ano (ex: próximo)
+    // cy.get('[aria-label="Next Year"]').click();
+
+    // 4. Selecionar o mês
+    cy.contains(".p-datepicker-month", mes).should("be.visible").click();
   }
 
   // Seleciona a propriedade produção
@@ -66,7 +108,9 @@ class ContaPagar {
   cadastrarCategoria() {
     cy.get(el.botaoCadastrarCategoria).click();
 
-    cy.get(el.inputDescricaoCategoria).should("be.visible").type("TESTE98");
+    cy.get(el.inputDescricaoCategoria)
+      .should("be.visible")
+      .type("Categoria Teste");
 
     this.salvar();
   }
@@ -75,13 +119,18 @@ class ContaPagar {
   cadastrarCategoriaTD() {
     cy.get(el.botaoCadastrarCategoria).click();
 
-    cy.get(el.inputDescricaoCategoria).should("be.visible").type("TESTE99");
+    cy.get(el.inputDescricaoCategoria)
+      .should("be.visible")
+      .type("Categoria Teste TD");
 
     // Autocomplete correto
-    cy.get(el.selectCategoriaPai).should("be.visible").clear().type("TESTE");
+    cy.get(el.selectCategoriaPai)
+      .should("be.visible")
+      .clear()
+      .type("Categoria Teste");
 
     cy.get("body", { timeout: 10000 })
-      .contains(".p-autocomplete-option", "TESTE98")
+      .contains(".p-autocomplete-option", "Categoria Teste")
       .should("be.visible")
       .click();
 
@@ -92,7 +141,9 @@ class ContaPagar {
   verificarCategoria() {
     cy.get(el.botaoCadastrarCategoria).click();
 
-    cy.get(el.inputDescricaoCategoria).should("be.visible").type("TESTE98");
+    cy.get(el.inputDescricaoCategoria)
+      .should("be.visible")
+      .type("Categoria Teste");
 
     this.salvar();
 
@@ -107,7 +158,7 @@ class ContaPagar {
   cadastrarFornecedor() {
     cy.get(el.botaoCadastrarContato).click();
 
-    cy.get(el.inputNome).type("Teste03");
+    cy.get(el.inputNome).type("AFornecedor Teste");
 
     // Seleciona tipo de contato como Fornecedor
     cy.get(el.selectTipoContato).click();
@@ -131,7 +182,7 @@ class ContaPagar {
   cadastrarContaBancaria() {
     cy.get(el.botaoCadastrarContaBancaria).click();
 
-    cy.get(el.inputNome).type("Conta Principal");
+    cy.get(el.inputNome).type("Conta TESTE");
     cy.get(el.inputBankCode).type("001");
     cy.get(el.inputBankName).type("Banco do Brasil");
     cy.get(el.inputAgency).type("1234-5");
@@ -144,20 +195,135 @@ class ContaPagar {
   cadastrarCentroCusto() {
     cy.get(el.botaoCadastrarCentroCusto).click();
 
-    cy.get(el.inputNome).type("Marketing");
+    cy.get(el.inputNome).type("Centro de Custo TESTE");
 
     this.salvar();
   }
 
   // Preenche os dados básicos de um lançamento a pagar
   incluirTituloPago() {
-    cy.get(el.inputDescricao).should("be.visible").type("TESTE6");
-    cy.get(el.inputValor).clear().type("260");
-    cy.get(el.inputDataVencimento).clear().type("25/02/2026");
-    cy.get(el.inputDataCompetencia).clear().type("24/03/2026");
+    const competencia = dataHoje();
+    const vencimento = dataFutura(7);
 
-    // Marca como título já pago
+    cy.get(el.inputDescricao).should("be.visible").type("Titulo Teste Pago");
+    cy.get(el.inputValor).clear().type("260");
+    cy.get(el.inputDataVencimento).clear().type(vencimento);
+    cy.get(el.inputDataCompetencia).clear().type(competencia);
+
+    // Marca como Titulo já pago
     cy.get(el.checkboxPago).check();
+  }
+
+  // Incluir Titulo Diário
+  incluirTituloDiario() {
+    const competencia = dataHoje();
+    const vencimento = dataFutura(7);
+
+    cy.get(el.inputDescricao).should("be.visible").type("Titulo Teste Diário");
+    cy.get(el.inputValor).clear().type("260");
+    cy.get(el.inputDataVencimento).clear().type(vencimento);
+    cy.get(el.inputDataCompetencia).clear().type(competencia);
+
+    // Marca como Titulo já pago
+    cy.get(el.checkboxPago).check();
+  }
+
+  // Incluir Titulo Semanal
+  incluirTituloSemanal() {
+    const competencia = dataHoje();
+    const vencimento = dataFutura(7); // +7 dias
+
+    cy.get(el.inputDescricao).should("be.visible").type("Titulo Teste Semanal");
+
+    cy.get(el.inputValor).clear().type("260");
+
+    cy.get(el.inputDataVencimento).clear().type(vencimento);
+
+    cy.get(el.inputDataCompetencia).clear().type(competencia);
+
+    // Marca como Título já pago
+    cy.get(el.checkboxPago).check();
+  }
+
+  // Incluir Titulo Anual
+  incluirTituloAnual() {
+    const hoje = new Date();
+
+    const competencia = formatarData(hoje);
+
+    const vencimentoDate = new Date();
+    vencimentoDate.setDate(vencimentoDate.getDate() + 365);
+
+    const vencimento = formatarData(vencimentoDate);
+
+    this.periodoVencimento = mesAnoFromDate(vencimentoDate);
+
+    cy.get(el.inputDescricao).should("be.visible").type("Titulo Teste Anual");
+    cy.get(el.inputValor).clear().type("260");
+    cy.get(el.inputDataVencimento).clear().type(vencimento);
+    cy.get(el.inputDataCompetencia).clear().type(competencia);
+
+    cy.get(el.checkboxPago).check();
+  }
+
+  // Incluir Titulo Mensal
+  incluirTituloMensal() {
+    const competencia = dataHoje();
+    const vencimento = dataFutura(30); // +30 dias
+
+    cy.get(el.inputDescricao).should("be.visible").type("Titulo Teste Mensal");
+    cy.get(el.inputValor).clear().type("260");
+    cy.get(el.inputDataVencimento).clear().type(vencimento);
+    cy.get(el.inputDataCompetencia).clear().type(competencia);
+
+    // Marca como Titulo já pago
+    cy.get(el.checkboxPago).check();
+  }
+
+  // Preenche os dados básicos de um lançamento a pagar
+  incluirTitulo() {
+    const competencia = dataHoje();
+    const vencimento = dataFutura(7);
+
+    cy.get(el.inputDescricao).should("be.visible").type("Titulo Teste");
+    cy.get(el.inputValor).clear().type("260");
+    cy.get(el.inputDataVencimento).clear().type(vencimento);
+    cy.get(el.inputDataCompetencia).clear().type(competencia);
+  }
+
+  // Preenche os dados básicos de um lançamento a pagar (Parcelamento)
+  incluirTituloParcelado() {
+    const competencia = dataHoje();
+    const vencimento = dataFutura(7);
+
+    cy.get(el.inputDescricao)
+      .should("be.visible")
+      .type("Titulo Teste Parcelado");
+    cy.get(el.inputValor).clear().type("260");
+    cy.get(el.inputDataVencimento).clear().type(vencimento);
+    cy.get(el.inputDataCompetencia).clear().type(competencia);
+  }
+
+  // Preenche os dados básicos de um lançamento a pagar (Observação)
+  incluirTituloObservacao() {
+    const competencia = dataHoje();
+    const vencimento = dataFutura(7); // +7 dias
+
+    cy.get(el.inputDescricao)
+      .should("be.visible")
+      .type("Titulo Teste Observação");
+
+    cy.get(el.inputValor).clear().type("260");
+
+    cy.get(el.inputDataVencimento)
+      .clear()
+      .should("have.value", "")
+      .type(vencimento);
+
+    cy.get(el.inputDataCompetencia)
+      .clear()
+      .should("have.value", "")
+      .type(competencia);
   }
 
   // Duplica um lançamento existente baseado no nome informado
@@ -171,13 +337,19 @@ class ContaPagar {
   }
 
   // Edita um lançamento existente
-  editarLancamento(nome) {
-    cy.contains(el.colunaTabela, nome)
-      .parents(el.linhaTabela)
-      .find(el.botaoEditar)
-      .click();
+  editarLancamento(descricaoAtual, novaDescricao) {
+    // Encontrar a linha com a descrição
+    cy.contains(elements.colunaTabela, descricaoAtual)
+      .parents(elements.linhaTabela)
+      .within(() => {
+        cy.get(elements.botaoEditar).click();
+      });
 
-    this.salvar();
+    // Editar descrição
+    cy.get(elements.inputDescricao).clear().type(novaDescricao);
+
+    // Salvar
+    cy.contains(elements.botaoSalvar, "Salvar").click();
   }
 
   // Exclui um lançamento específico
@@ -285,10 +457,12 @@ class ContaPagar {
       .should("be.visible")
       .click();
 
+    this.ExcluirTudo();
+
     this.Confimar();
   }
 
-  // Reabre um título previamente fechado/pago
+  // Reabre um Titulo previamente fechado/pago
   reabrirTitulo(nome) {
     cy.contains(el.colunaTabela, nome)
       .first()
@@ -341,11 +515,20 @@ class ContaPagar {
     this.salvar();
   }
 
-  // Adiciona observação ao título
+  // Adiciona observação ao Titulo
   observacaoTituloPagar() {
     cy.contains(el.abaDetalhes).click();
 
-    cy.get(el.inputObservacao).type("Teste");
+    cy.get(el.inputObservacao).type("Teste Editado Observação");
+
+    this.salvar();
+  }
+
+  // Adiciona observação ao Titulo
+  observacaoTitulo() {
+    cy.contains(el.abaDetalhes).click();
+
+    cy.get(el.inputObservacao).type("Teste Editado Observação");
 
     this.salvar();
   }
@@ -356,7 +539,7 @@ class ContaPagar {
 
     cy.get(el.selectListbox).should("be.visible");
 
-    cy.contains(el.opcaoPropriedade, opcao).click(); 
+    cy.contains(el.opcaoPropriedade, opcao).click();
   }
 
   // Parcelamento
@@ -385,6 +568,10 @@ class ContaPagar {
   // Acão padrão para Confirmar
   Confimar() {
     cy.contains(el.Confirmar, "Confirmar").should("not.be.disabled").click();
+  }
+
+  ExcluirTudo() {
+    cy.contains(el.Confirmar, "Excluir Tudo").should("not.be.disabled").click();
   }
 }
 

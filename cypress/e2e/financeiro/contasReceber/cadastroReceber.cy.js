@@ -25,7 +25,7 @@ describe("Cadastros a Receber", () => {
     contaReceber.cadastrarCategoriaReceberExistente();
 
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   it.only("Cadastrar Nova Categoria ", () => {
@@ -35,7 +35,7 @@ describe("Cadastros a Receber", () => {
     contaReceber.cadastrarCategoria();
 
     // Assert (Verificar/Validar)
-  
+     inventory.validarContaReceber();
   });
 
   it("Cadastrar Fornecedor", () => {
@@ -43,7 +43,7 @@ describe("Cadastros a Receber", () => {
     contaReceber.cadastrarFornecedor();
 
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   it("Cadastrar Conta Bancaria", () => {
@@ -51,7 +51,7 @@ describe("Cadastros a Receber", () => {
     contaReceber.cadastrarContaBancaria();
 
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   it("Cadastrar Centro de Custo", () => {
@@ -59,6 +59,6 @@ describe("Cadastros a Receber", () => {
     contaReceber.cadastrarCentroCusto();
 
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 });

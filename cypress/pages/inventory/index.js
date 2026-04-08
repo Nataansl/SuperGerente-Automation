@@ -23,12 +23,12 @@ class Inventory {
     cy.visit("https://supergerente.hmax.com.br/#/financeiro/contas-receber");
   }
 
-   acessarCategoria() {
+  acessarCategoria() {
     cy.visit("/#/financeiro/categoria-financeiro");
   }
 
   validarUrlCategoria() {
-    cy.url().should('include', '/financeiro/categoria-financeiro');
+    cy.url().should("include", "/financeiro/categoria-financeiro");
   }
 
   validarCentroCusto() {
@@ -38,5 +38,16 @@ class Inventory {
   validarContatos() {
     cy.visit("https://supergerente.hmax.com.br/#/financeiro/contatos");
   }
+
+  validarContasBancarias() {
+    cy.url().should("include", "/financeiro/contas-bancaria");
+  }
+
+  validarContato() {
+    cy.visit("https://supergerente.hmax.com.br/#/financeiro/contatos");
+  }
+  
+
+
 }
 export default new Inventory();

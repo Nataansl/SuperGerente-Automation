@@ -24,7 +24,7 @@ describe("Duplicar o Lancamento (APagar) ", () => {
   it("Duplicar Lancamento", () => {
     // Act (Agir/Executar)
     contaPagar.selecionarModuloPagar();
-    contaPagar.duplicarLancamento("Receber Antecipação");
+    contaPagar.duplicarLancamento("Título Teste Observação");
 
     // Assert
     cy.url().should("include", "/financeiro/contas-pagar");
