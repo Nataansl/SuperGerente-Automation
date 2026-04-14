@@ -1,108 +1,214 @@
 import contaReceber from "../../../pages/auth/contaReceber";
 import Login from "../../../pages/auth/login";
 import inventory from "../../../pages/inventory";
+import categoria from "../../../pages/auth/categoria";
+import contatos from "../../../pages/auth/contatos";
 
 describe("Conta a Receber", () => {
-  // Executa antes de cada teste
   beforeEach(() => {
     cy.viewport(1280, 858);
     contaReceber.visitarPaginaLogin();
     Login.visitarPaginaLoginDEV();
     Login.preencherCredenciasValidarDV();
-
-        // Selecionar Propriedade (Desenvolvimento)
-    //contaReceber.selecionarPropriedadeDEV();
-
-       // Produção (Selecionar Propriedade)
-    // categoria.selecionarPropriedade();
-
-       // Produção (Login)
-    // Login.preencherCredenciaisValidas();
   });
 
-  it("Conta a receber", () => {
-    // Act (Agir/Executar)
+  it("Conta A Receber", () => {
+      // Act
     contaReceber.novoLancamentoReceber();
-
-    // Assert
-    cy.url().should("include", "/financeiro/contas-receber");
+    
+     // Assert (Verificar/Validar) 
+    inventory.validarContaReceber();
   });
 
   it("Incluir Titulo A Receber", () => {
-    // Act (Agir/Executar)
     contaReceber.novoLancamentoReceber();
     contaReceber.incluirTitulo();
 
-    contaReceber.dropdown("#category", "CAIXA GERAL");
-    contaReceber.dropdown("#contact", "ANTÔNIA E EDUARDA");
-    contaReceber.dropdown("#bankAccount", "BANCO DO BRASIL");
-    contaReceber.dropdown("#costCenter", "Despesas Fixas");
+    contaReceber.dropdownCategoria("#category", "Categoria Teste");
+    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
+    contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
 
-    cy.contains("button", "Salvar").should("not.be.disabled").click();
-
-    //Assert (Verificar/Validar)
-
-    cy.url().should("include", "/financeiro/contas-receber");
+    contaReceber.salvar();
+    inventory.validarContaReceber();
   });
 
-  it("Incluir Titulo A Receber (Pago)", () => {
-    // Act (Agir/Executar)
-    contaReceber.novoLancamentoReceber();
-    contaReceber.incluirTitulo();
+  it("Excluir Titulo", () => {
+    contaReceber.selecionarModuloReceber();
+    contaReceber.paginatorContaReceber();
 
-    contaReceber.dropdown("#category", "CAIXA GERAL");
-    contaReceber.dropdown("#contact", "ANTÔNIA E EDUARDA");
-    contaReceber.dropdown("#bankAccount", "BANCO DO BRASIL");
-    contaReceber.dropdown("#costCenter", "Despesas Fixas");
-
-    contaReceber.botaoSalvar();
-
-    //Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    contaReceber.excluirLancamento("Titulo Teste");
+    inventory.validarContaReceber();
   });
 
-  it("Campos Obrigatorios", () => {
-    // Act (Agir/Executar)
+  it("Incluir Titulo (Pago)", () => {
     contaReceber.novoLancamentoReceber();
-    contaReceber.incluirTitulo();
+    contaReceber.incluirTituloPago();
 
-    contaReceber.dropdown("#category", "CAIXA GERAL");
-    contaReceber.dropdown("#bankAccount", "BANCO DO BRASIL");
+    contaReceber.dropdownCategoria("#category", "Categoria Teste");
+    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
+    contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
 
-    contaReceber.botaoSalvar();
-
-    //Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    contaReceber.salvar();
+    inventory.validarContaReceber();
   });
 
-  it("Parcelamento", () => {
-    // Act (Agir/Executar)
+  it("Conta a Receber (Parcelamento)", () => {
     contaReceber.novoLancamentoReceber();
-    contaReceber.incluirTitulo();
+    contaReceber.incluirTituloParcelado();
 
-    contaReceber.dropdown("#category", "CAIXA GERAL");
-    contaReceber.dropdown("#bankAccount", "BANCO DO BRASIL");
+    contaReceber.dropdownCategoria("#category", "Categoria Teste");
+    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
 
     contaReceber.selecionarParcelamento();
+    contaReceber.salvar();
 
-    contaReceber.botaoSalvar();
+    inventory.validarContaReceber();
+  });
 
-    // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+  it("Excluir Titulo (Parcelado)", () => {
+    contaReceber.selecionarModuloReceber();
+    contaReceber.paginatorContaReceber();
+
+    contaReceber.excluirProximos("Titulo Teste Parcelado");
+    inventory.validarContaReceber();
   });
 
   it("Observacao no Titulo", () => {
-    // Act (Agir/Executar)
     contaReceber.novoLancamentoReceber();
+    contaReceber.incluirTituloObservacao();
 
-    contaReceber.dropdown("#category", "CAIXA GERAL");
-    contaReceber.dropdown("#bankAccount", "BANCO DO BRASIL");
+    contaReceber.dropdownCategoria("#category", "Categoria Teste");
+    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
 
-    contaReceber.observacaoTituloReceber();
+    contaReceber.observacaoTitulo();
+    inventory.validarContaReceber();
+  });
 
-    contaReceber.botaoSalvar();
+  it("Duplicar Lancamento", () => {
+    contaReceber.selecionarModuloReceber();
+    contaReceber.paginatorContaReceber();
 
-    // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    contaReceber.duplicarLancamento("Titulo Teste Observação");
+    inventory.validarContaReceber();
+  });
+
+  it("Reabrir Titulo", () => {
+    contaReceber.selecionarModuloReceber();
+    contaReceber.paginatorContaReceber();
+
+    contaReceber.reabrirTitulo("Titulo Teste Pago");
+    inventory.validarContaReceber();
+  });
+
+  it("Editar descrição", () => {
+    contaReceber.selecionarModuloReceber();
+    contaReceber.paginatorContaReceber();
+
+    contaReceber.editarLancamento("Titulo Teste", "Editado Titulo Descrição");
+
+    inventory.validarContaReceber();
+  });
+
+  it("Editar Titulo", () => {
+    contaReceber.selecionarModuloReceber();
+    contaReceber.paginatorContaReceber();
+
+    contaReceber.editarLancamento(
+      "Editado Titulo Descrição",
+      "Titulo Teste Editado",
+    );
+
+    inventory.validarContaReceber();
+  });
+
+  it("Excluir Titulo Editado", () => {
+    contaReceber.selecionarModuloReceber();
+    contaReceber.paginatorContaReceber();
+
+    contaReceber.excluirLancamento("Titulo Teste Editado");
+    inventory.validarContaReceber();
+  });
+
+  it("Recorrencia Diario", () => {
+    contaReceber.novoLancamentoReceber();
+    contaReceber.incluirTituloDiario();
+
+    contaReceber.dropdownCategoria("#category", "Categoria Teste");
+    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
+    contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
+
+    contaReceber.ativarRecorrencia();
+    contaReceber.selecionarFrequencia("Diário");
+    contaReceber.salvar();
+
+    inventory.validarContaReceber();
+  });
+
+  it("Excluir Recorrente Diario", () => {
+    contaReceber.selecionarModuloReceber();
+    contaReceber.paginatorContaReceber();
+
+    contaReceber.excluirTodos("Titulo Teste Diário");
+    inventory.validarContaReceber();
+  });
+
+  it("Recorrencia Semanal", () => {
+    contaReceber.novoLancamentoReceber();
+    contaReceber.incluirTituloSemanal();
+
+    contaReceber.dropdownCategoria("#category", "Categoria Teste");
+    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
+    contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
+
+    contaReceber.ativarRecorrencia();
+    contaReceber.selecionarFrequencia("Semanal");
+    contaReceber.salvar();
+  });
+
+  it("Excluir Recorrente Semanal", () => {
+    contaReceber.selecionarModuloReceber();
+    contaReceber.paginatorContaReceber();
+
+    contaReceber.excluirProximos("Titulo Teste Semanal");
+    inventory.validarContaReceber();
+  });
+
+  it("Recorrencia Anual", () => {
+    contaReceber.novoLancamentoReceber();
+    contaReceber.incluirTituloAnual();
+
+    contaReceber.dropdownCategoria("#category", "Categoria Teste");
+    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
+    contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
+
+    contaReceber.ativarRecorrencia();
+    contaReceber.selecionarFrequencia("Anual");
+    contaReceber.salvar();
+
+    inventory.validarContaReceber();
+  });
+
+  it("Recorrencia Mensal", () => {
+    contaReceber.novoLancamentoReceber();
+    contaReceber.incluirTituloMensal();
+
+    contaReceber.dropdownCategoria("#category", "Categoria Teste");
+    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
+    contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
+
+    contaReceber.ativarRecorrencia();
+    contaReceber.selecionarFrequencia("Mensal");
+    contaReceber.salvar();
+
+    inventory.validarContaReceber();
+  });
+
+  it("Excluir Recorrente Mensal", () => {
+    contaReceber.selecionarModuloReceber();
+    contaReceber.SelecionarMes();
+    contaReceber.paginatorContaReceber();
+
+    contaReceber.excluirTodos("Titulo Teste Mensal");
+    inventory.validarContaReceber();
   });
 });

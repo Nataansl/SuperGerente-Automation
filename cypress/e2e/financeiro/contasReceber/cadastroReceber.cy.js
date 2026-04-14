@@ -2,63 +2,91 @@ import contaReceber from "../../../pages/auth/contaReceber";
 import Login from "../../../pages/auth/login";
 import inventory from "../../../pages/inventory";
 
-describe("Cadastros a Receber", () => {
-  // Executa antes de cada teste
+describe("Cadastros Conta Receber", () => {
+
   beforeEach(() => {
     cy.viewport(1280, 858);
     contaReceber.visitarPaginaLogin();
     Login.visitarPaginaLoginDEV();
     Login.preencherCredenciasValidarDV();
 
-      // Selecionar Propriedade (Desenvolvimento)
-    //contaReceber.selecionarPropriedadeDEV();
+    // DEV
+    // contaReceber.selecionarPropriedadeDEV();
 
-       // Produção (Selecionar Propriedade)
-    // categoria.selecionarPropriedade();
-
-       // Produção (Login)
+    // PROD
     // Login.preencherCredenciaisValidas();
   });
 
-  it("Cadastrar Categoria (Existente) ", () => {
-    // Act (Agir/Executar)
-    contaReceber.cadastrarCategoriaReceberExistente();
+  // =============================
+  // CATEGORIA
+  // =============================
+  it("Cadastrar Categoria", () => {
+    contaReceber.selecionarModuloReceber();
+    contaReceber.novoLancamentoReceber();
+    contaReceber.cadastrarCategoria();
 
-    // Assert (Verificar/Validar)
     cy.url().should("include", "/financeiro/contas-receber");
   });
 
-  it.only("Cadastrar Nova Categoria ", () => {
-    // Act (Agir/Executar)
+  it("Verificar Categoria Duplicada", () => {
     contaReceber.selecionarModuloReceber();
-    contaReceber.novoLancamentoReceber(); 
-    contaReceber.cadastrarCategoria();
+    contaReceber.novoLancamentoReceber();
+    contaReceber.verificarCategoria();
 
-    // Assert (Verificar/Validar)
-  
+    cy.url().should("include", "/financeiro/contas-receber");
   });
 
+  it.only("Cadastrar Categoria (TodaRede)", () => {
+    contaReceber.selecionarModuloReceber();
+    contaReceber.novoLancamentoReceber();
+    contaReceber.cadastrarCategoriaTD();
+
+    cy.url().should("include", "/financeiro/contas-receber");
+  });
+
+  it("Cadastro Duplicado", () => {
+    contaReceber.selecionarModuloReceber();
+    contaReceber.novoLancamentoReceber();
+    contaReceber.verificarCategoria();
+
+    cy.url().should("include", "/financeiro/contas-receber");
+  });
+
+  // =============================
+  //  FORNECEDOR
+  // =============================
   it("Cadastrar Fornecedor", () => {
     // Act (Agir/Executar)
+    contaReceber.selecionarModuloReceber();
+    contaReceber.novoLancamentoReceber();
     contaReceber.cadastrarFornecedor();
 
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    cy.url().should("include", "/financeiro/contas-pagar");
   });
 
+
+  // =============================
+  // CONTA BANCÁRIA
+  // =============================
   it("Cadastrar Conta Bancaria", () => {
-    // Act (Agir/Executar)
+    contaReceber.selecionarModuloReceber();
+    contaReceber.novoLancamentoReceber();
     contaReceber.cadastrarContaBancaria();
 
-    // Assert (Verificar/Validar)
     cy.url().should("include", "/financeiro/contas-receber");
   });
-
+  
+ 
+  // =============================
+  // CENTRO DE CUSTO
+  // =============================
   it("Cadastrar Centro de Custo", () => {
-    // Act (Agir/Executar)
+    contaReceber.selecionarModuloReceber();
+    contaReceber.novoLancamentoReceber();
     contaReceber.cadastrarCentroCusto();
 
-    // Assert (Verificar/Validar)
     cy.url().should("include", "/financeiro/contas-receber");
   });
+
 });

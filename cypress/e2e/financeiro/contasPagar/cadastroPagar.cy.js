@@ -33,7 +33,7 @@ describe("Cadastros Conta Pagar", () => {
 
 
   // Verificar Categoria Duplicada
-   ("Verificar Categoria Duplicada", () => {
+  it("Verificar Categoria Duplicada", () => {
     // Act (Agir/Executar)
     contaPagar.selecionarModuloPagar();
     contaPagar.novoLancamentoPagar();
@@ -45,7 +45,7 @@ describe("Cadastros Conta Pagar", () => {
 
 
   // Cadastrar Categoria (TodaRede)
-  it.only("Cadastrar Categoria (TodaRede)", () => {
+  it("Cadastrar Categoria (TodaRede)", () => {
     // Act (Agir/Executar)
     contaPagar.selecionarModuloPagar();
     contaPagar.novoLancamentoPagar();

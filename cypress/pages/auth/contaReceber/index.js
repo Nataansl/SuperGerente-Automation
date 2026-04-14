@@ -1,296 +1,338 @@
 import { elements as el } from "./elements";
 
+function formatarData(data) {
+  const dia = String(data.getDate()).padStart(2, "0");
+  const mes = String(data.getMonth() + 1).padStart(2, "0");
+  const ano = data.getFullYear();
+
+  return `${dia}/${mes}/${ano}`;
+}
+
+function dataHoje() {
+  return formatarData(new Date());
+}
+
+function dataFutura(dias) {
+  const data = new Date();
+  data.setDate(data.getDate() + dias);
+  return formatarData(data);
+}
 
 class ContaReceber {
-  // Acessa a aplicação pelo link principal
   visitarPaginaLogin() {
     cy.visit(el.urlDV);
   }
 
-  // Seleciona a propriedade produção
-  selecionarPropriedade() {
-    cy.get(el.selectCliente, { timeout: 10000 }).should("be.visible").click();
-
-    cy.contains(el.opcaoPropriedade, "Teste PNatan", {
-      timeout: 10000,
-    }).click();
-
-    cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
-      .should("not.be.disabled")
-      .click();
-  }
-
-  // Selecionar a propriedade DEV
-  selecionarPropriedadeDEV() {
-    cy.get(el.selectCliente, { timeout: 10000 }).should("be.visible").click();
-
-    cy.contains(el.opcaoPropriedade, "HOTEL_CENTRAL_DEV", {
-      timeout: 10000,
-    }).click();
-
-    cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
-      .should("not.be.disabled")
-      .click();
-  }
-
-  // Selecionar o Modulo Receber
-  selecionarModuloReceber() {
-    cy.contains(el.menuFinanceiro, "Financeiro", { timeout: 10000 })
-      .closest(".p-panelmenu-header")
-      .click();
-
-    cy.contains(el.menuContasReceber, { timeout: 10000 })
-      .should("be.visible")
-      .click();
-  }
-
-  // Paginação
-  paginatorContaReceber() {
-    cy.get(el.paginatorDropdown, { timeout: 10000 }).click();
-
-    cy.get("body")
-      .find(el.paginatorOptions)
-      .contains("30", { timeout: 10000 })
-      .click();
-  }
-
-  // Novo lançamento
-  novoLancamentoReceber() {
-    this.selecionarModuloReceber();
-
-    cy.contains(el.botaoNovoLancamento, { timeout: 10000 })
-      .should("be.visible")
-      .click();
-  }
-
-  // Toda Rede
-  todaRede() {
-    cy.get(el.selectCliente, { timeout: 10000 }).should("be.visible").click();
-
-    cy.contains(el.opcaoPropriedade, "Teste PNatan", {
-      timeout: 10000,
-    }).click();
-
-    cy.get(el.checkboxTodaRede).click();
-
-    cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
-      .should("not.be.disabled")
-      .click();
-
-    cy.contains(el.menuContasReceber, { timeout: 10000 })
-      .should("be.visible")
-      .click();
-  }
-
-  // Categoria
-  cadastrarCategoriaReceberExistente() {
+  // =============================
+  // CATEGORIA
+  // =============================
+  cadastrarCategoria() {
     cy.get(el.botaoCadastrarCategoria).click();
 
-    cy.get(el.inputDescricaoCategoria).should("be.visible").type("TESTE98");
+    cy.get(el.inputDescricaoCategoria)
+      .should("be.visible")
+      .type("Categoria Teste");
 
     this.salvar();
   }
 
-  // Cadastra uma nova categoria financeira
-    cadastrarCategoria() {
-      cy.get(el.botaoCadastrarCategoria).click();
-  
-      cy.get(el.inputDescricaoCategoria).should("be.visible").type("TESTE");
-  
-      this.salvar();
-    }
+  cadastrarCategoriaTD() {
+    cy.get(el.botaoCadastrarCategoria).click();
 
-  // Verificar a notificação
-  verificarNotificacao(titulo, mensagem) {
+    cy.get(el.inputDescricaoCategoria)
+      .should("be.visible")
+      .type("Categoria Teste TD");
+
+    cy.get(el.selectCategoriaPai)
+      .should("be.visible")
+      .clear()
+      .type("Categoria Teste");
+
+    cy.get("body")
+      .contains(".p-autocomplete-option", "Categoria Teste")
+      .click();
+
+    this.salvar();
+  }
+
+  verificarCategoria() {
+    cy.get(el.botaoCadastrarCategoria).click();
+
+    cy.get(el.inputDescricaoCategoria)
+      .should("be.visible")
+      .type("Categoria Teste");
+
+    this.salvar();
+
     cy.get(el.NotificationTitle).should("be.visible").and("contain", "Atenção");
 
-    cy.get(el.NotificationMessage, { timeout: 10000 })
+    cy.get(el.NotificationMessage)
       .should("be.visible")
       .and("contain", "Já existe uma categoria com esse nome.");
   }
 
-  // Fornecedor
+  // =============================
+  // CONTATO
+  // =============================
   cadastrarFornecedor() {
     cy.get(el.botaoCadastrarContato).click();
 
-    cy.get(el.inputNome).type("Teste03");
+    cy.get(el.inputNome).type("RFornecedor Teste");
 
     cy.get(el.selectTipoContato).click();
 
-    cy.get("body")
-      .find(el.opcaoSelect, { timeout: 10000 })
-      .should("be.visible");
+    cy.get("body").find(el.opcaoSelect).should("be.visible");
 
     cy.contains(el.opcaoSelect, "Fornecedor").click();
 
-    cy.get(el.inputDocumento).type("00.000.000/0000.09");
-    cy.get(el.inputTelefone).type("47996598596");
-    cy.get(el.inputEmail).type("teste@gmail.com.br");
-    cy.get(el.inputEndereco).type("Rua Cordeiro de Deus");
+    cy.get(el.inputDocumento).type("00.000.000/0000-00");
+    cy.get(el.inputTelefone).type("11999999999");
+    cy.get(el.inputEmail).type("teste@gmail.com");
+    cy.get(el.inputEndereco).type("Rua Teste");
 
-    cy.contains(el.botaoSalvar, "Salvar").should("not.be.disabled").click();
+    this.salvar();
   }
 
-  // Conta bancária
+  // =============================
+  // CONTA BANCÁRIA
+  // =============================
   cadastrarContaBancaria() {
     cy.get(el.botaoCadastrarContaBancaria).click();
 
-    cy.get(el.inputNome).type("Conta Principal");
+    cy.get(el.inputNome).type("Conta TESTE");
     cy.get(el.inputBankCode).type("001");
     cy.get(el.inputBankName).type("Banco do Brasil");
-    cy.get(el.inputAgency).type("1234-5");
-    cy.get(el.inputAccount).type("123456-7");
+    cy.get(el.inputAgency).type("1234");
+    cy.get(el.inputAccount).type("123456");
 
-    cy.contains(el.botaoSalvar, "Salvar").should("not.be.disabled").click();
+    this.salvar();
   }
 
-  // Centro de custo
+  // =============================
+  // CENTRO DE CUSTO
+  // =============================
   cadastrarCentroCusto() {
     cy.get(el.botaoCadastrarCentroCusto).click();
 
-    cy.get(el.inputNome).type("Marketing");
+    cy.get(el.inputNome).type("Centro de Custo TESTE");
 
-    cy.contains(el.botaoSalvar, "Salvar").should("not.be.disabled").click();
+    this.salvar();
   }
 
-  // Lançamentos
+  // =============================
+  // PROPRIEDADE
+  // =============================
+  selecionarPropriedadeDEV() {
+    cy.get(el.selectCliente).click();
+
+    cy.contains(el.opcaoPropriedade, "HOTEL_CENTRAL_DEV").click();
+
+    cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
+      .should("not.be.disabled")
+      .click();
+  }
+
+  // =============================
+  // MENU
+  // =============================
+  selecionarModuloReceber() {
+    cy.contains(el.menuFinanceiro, "Financeiro")
+      .closest(".p-panelmenu-header")
+      .click();
+
+    cy.contains(el.menuContasReceber).should("be.visible").click();
+  }
+
+  paginatorContaReceber() {
+    cy.get(el.paginatorDropdown).click();
+
+    cy.get("body").find(el.paginatorOptions).contains("30").click();
+  }
+
+  // =============================
+  // AÇÕES PRINCIPAIS
+  // =============================
+  novoLancamentoReceber() {
+    this.selecionarModuloReceber();
+
+    cy.contains(el.botaoNovoLancamento).should("be.visible").click();
+  }
+
+  salvar() {
+    cy.contains("button", "Salvar")
+      .should("be.visible")
+      .and("not.be.disabled")
+      .click();
+  }
+
+  // =============================
+  // PREENCHIMENTO
+  // =============================
   incluirTitulo() {
-    cy.get(el.inputDescricao).should("be.visible").type("TESTE6");
+    cy.get(el.inputDescricao).type("Titulo Teste");
     cy.get(el.inputValor).clear().type("260");
-    cy.get(el.inputDataVencimento).clear().type("25/02/2026");
-    cy.get(el.inputDataCompetencia).clear().type("24/03/2026");
+    cy.get(el.inputDataVencimento).clear().type(dataFutura(7));
+    cy.get(el.inputDataCompetencia).clear().type(dataHoje());
+  }
+
+  incluirTituloPago() {
+    this.incluirTitulo();
     cy.get(el.checkboxPago).check();
   }
 
-  duplicarLancamento() {
-    cy.contains(el.colunaTabela, "TESTE6")
-      .parents(el.linhaTabela)
-      .find(el.botaoDuplicar)
-      .click();
+  incluirTituloParcelado() {
+    cy.get(el.inputDescricao).type("Titulo Teste Parcelado");
+    cy.get(el.inputValor).clear().type("260");
+    cy.get(el.inputDataVencimento).clear().type(dataFutura(7));
+    cy.get(el.inputDataCompetencia).clear().type(dataHoje());
   }
 
-  reabrirTitulo() {
-    cy.contains(el.colunaTabela, "TESTE6")
-      .first()
-      .closest(el.linhaTabela)
-      .find(el.botaoEditar)
-      .click();
-
-    cy.contains(el.botaoSalvar, "Reabrir Título")
-      .should("not.be.disabled")
-      .click();
-
-    cy.get(el.botaoConfirmarOk).click();
-
-    cy.get(el.inputDescricao).type("TESTE6");
+  incluirTituloObservacao() {
+    cy.get(el.inputDescricao).type("Titulo Teste Observação");
+    cy.get(el.inputValor).clear().type("260");
+    cy.get(el.inputDataVencimento).clear().type(dataFutura(7));
+    cy.get(el.inputDataCompetencia).clear().type(dataHoje());
   }
 
-  editarLancamento() {
-    cy.contains(el.colunaTabela, "A PAGAR223")
-      .parents(el.linhaTabela)
-      .find(el.botaoEditar)
-      .click();
+  incluirTituloDiario() {
+    cy.get(el.inputDescricao).type("Titulo Teste Diário");
+    cy.get(el.inputValor).clear().type("260");
+    cy.get(el.inputDataVencimento).clear().type(dataFutura(7));
+    cy.get(el.inputDataCompetencia).clear().type(dataHoje());
+    cy.get(el.checkboxPago).check();
   }
 
-  // Dropdown genérico
-  dropdown(campo, opcao) {
-    cy.get(campo).should("be.visible").click().type(opcao);
-
-    cy.get(el.selectListbox, { timeout: 10000 }).should("be.visible");
-
-    cy.contains(el.opcaoPropriedade, opcao).scrollIntoView().click();
+  incluirTituloSemanal() {
+    cy.get(el.inputDescricao).type("Titulo Teste Semanal");
+    cy.get(el.inputValor).clear().type("260");
+    cy.get(el.inputDataVencimento).clear().type(dataFutura(7));
+    cy.get(el.inputDataCompetencia).clear().type(dataHoje());
+    cy.get(el.checkboxPago).check();
   }
 
-  // Parcelamento
+  incluirTituloMensal() {
+    cy.get(el.inputDescricao).type("Titulo Teste Mensal");
+    cy.get(el.inputValor).clear().type("260");
+    cy.get(el.inputDataVencimento).clear().type(dataFutura(30));
+    cy.get(el.inputDataCompetencia).clear().type(dataHoje());
+    cy.get(el.checkboxPago).check();
+  }
+
+  incluirTituloAnual() {
+    const data = new Date();
+    data.setDate(data.getDate() + 365);
+
+    cy.get(el.inputDescricao).type("Titulo Teste Anual");
+    cy.get(el.inputValor).clear().type("260");
+    cy.get(el.inputDataVencimento).clear().type(formatarData(data));
+    cy.get(el.inputDataCompetencia).clear().type(dataHoje());
+    cy.get(el.checkboxPago).check();
+  }
+
+  // =============================
+  // DROPDOWN
+  // =============================
+  dropdownCategoria(campo, opcao) {
+    cy.get(campo).click().type(opcao);
+
+    cy.get(el.selectListbox).should("be.visible");
+
+    cy.contains(el.opcaoPropriedade, opcao).click();
+  }
+
+  // =============================
+  // PARCELAMENTO
+  // =============================
   selecionarParcelamento() {
     cy.contains(el.campoParcelamento).click();
-
     cy.get(el.inputQtdParcelas).type(2);
+  }
+
+  // =============================
+  // RECORRÊNCIA
+  // =============================
+  ativarRecorrencia() {
+    cy.get(el.toggleRecorrencia).click();
+    cy.get(el.togglePermanente).click();
   }
 
   selecionarFrequencia(tipo) {
     cy.get(el.selectFrequencia).click();
-
-    cy.get(el.opcaoSelect, { timeout: 10000 }).should("be.visible");
-
-    cy.contains(el.opcaoPropriedade, tipo).click();
+    cy.contains(el.opcaoSelect, tipo).click();
   }
 
-  // Observação
-  observacaoTituloReceber() {
+  // =============================
+  // OBSERVAÇÃO
+  // =============================
+  observacaoTitulo() {
     cy.contains(el.abaDetalhes).click();
-
-    cy.get(el.inputObservacao).type("Teste");
-
-    cy.contains(el.botaoSalvar, "Salvar").should("not.be.disabled").click();
+    cy.get(el.inputObservacao).type("Teste Observação");
+    this.salvar();
   }
 
-  // Exclusão
+  // =============================
+  // AÇÕES TABELA
+  // =============================
+  duplicarLancamento(nome) {
+    cy.contains(el.colunaTabela, nome)
+      .parents(el.linhaTabela)
+      .find(el.botaoDuplicar)
+      .click();
+
+    this.salvar();
+  }
+
+  editarLancamento(nome, novo) {
+    cy.contains(el.colunaTabela, nome)
+      .parents(el.linhaTabela)
+      .find(el.botaoEditar)
+      .click();
+
+    cy.get(el.inputDescricao).clear().type(novo);
+
+    this.salvar();
+  }
+
   excluirLancamento(nome) {
     cy.contains(el.colunaTabela, nome)
-      .closest(el.linhaTabela)
+      .parents(el.linhaTabela)
       .find(el.botaoExcluir)
       .click();
 
-    cy.contains(el.opcaoExcluirUnico).should("not.be.disabled").click();
+    cy.contains("button", "Confirmar").click();
+  }
 
-    cy.contains(el.botaoConfirmar, "Confirmar")
-      .should("not.be.disabled")
+  excluirProximos(nome) {
+    cy.contains("tr", nome).find(el.iconeTrash).click();
+
+    cy.contains(el.opcaoExcluirProximos).click();
+    cy.contains("button", "Confirmar").click();
+  }
+
+  excluirTodos(nome) {
+    cy.contains("tr", nome).find(el.iconeTrash).click();
+
+    cy.contains(el.opcaoExcluirTodos).click();
+    cy.contains("button", "Confirmar").click();
+  }
+
+  // =============================
+  // OUTROS
+  // =============================
+  reabrirTitulo(nome) {
+    cy.contains(el.colunaTabela, nome)
+      .parents(el.linhaTabela)
+      .find(el.botaoEditar)
       .click();
+
+    cy.contains("button", "Reabrir Título").click();
+    cy.get(el.botaoConfirmarOk).click();
+
+    this.salvar();
   }
 
-  // Recorrência
-  ativarRecorrencia() {
-    cy.get(el.toggleRecorrencia).closest(".p-toggleswitch").click();
-  }
-
-  frequenciaRecorrente() {
-    const dataSelecionada = dayjs().add(7, "day"); // +7 dias
-    const ano = dataSelecionada.year();
-    const mes = dataSelecionada.month(); // 0-11
-    const dia = dataSelecionada.date();
-
-    cy.get(el.inputDataFrequencia)
-      .click()
-      .invoke("attr", "aria-controls")
-      .then((panelId) => {
-        cy.get(`#${panelId}`).find('[data-date="2026-2-4"]').click();
-      });
-
-    cy.contains(el.botaoSalvar, "Salvar").should("not.be.disabled").click();
-  }
-
-  frequenciaPermanente() {
-    cy.get(el.togglePermanente).closest(".p-toggleswitch").click();
-
-    cy.contains(el.botaoSalvar, "Salvar").should("not.be.disabled").click();
-  }
-
-  // Botão salvar genérico
-  salvar() {
-    cy.contains(el.botaoSalvar, "Salvar").should("not.be.disabled").click();
-  }
-
-  // Retorna a data de hoje no formato DD/MM/YYYY
-  dataHoje() {
-    return dayjs().format("DD/MM/YYYY");
-  }
-
-  // Retorna data futura, adicionando X dias
-  dataFutura(dias = 0) {
-    return dayjs().add(dias, "day").format("DD/MM/YYYY");
-  }
-
-  // Exemplo: incluir um título com datas dinâmicas
-  incluirTitulo() {
-    const dataHoje = dayjs().format("DD/MM/YYYY"); // data de hoje
-    const dataVencimento = dayjs().add(5, "day").format("DD/MM/YYYY"); // hoje + 5 dias
-
-    cy.get(el.inputDescricao).should("be.visible").type("TESTE6");
-    cy.get(el.inputValor).clear().type("260");
-    cy.get(el.inputDataVencimento).clear().type(dataVencimento);
-    cy.get(el.inputDataCompetencia).clear().type(dataHoje);
-    cy.get(el.checkboxPago).check();
+  SelecionarMes() {
+    cy.get(".pi-chevron-circle-right").filter(":visible").first().click();
   }
 }
 
