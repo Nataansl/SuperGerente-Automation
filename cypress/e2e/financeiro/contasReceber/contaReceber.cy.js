@@ -13,10 +13,10 @@ describe("Conta a Receber", () => {
   });
 
   it("Conta A Receber", () => {
-      // Act
+    // Act
     contaReceber.novoLancamentoReceber();
-    
-     // Assert (Verificar/Validar) 
+
+    // Assert (Verificar/Validar)
     inventory.validarContaReceber();
   });
 

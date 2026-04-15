@@ -23,9 +23,7 @@ class ContaReceber {
     cy.visit(el.urlDV);
   }
 
-  // =============================
-  // CATEGORIA
-  // =============================
+  // Selecionar CATEGORIA
   cadastrarCategoria() {
     cy.get(el.botaoCadastrarCategoria).click();
 
@@ -71,9 +69,7 @@ class ContaReceber {
       .and("contain", "Já existe uma categoria com esse nome.");
   }
 
-  // =============================
-  // CONTATO
-  // =============================
+  // Criar CONTATO
   cadastrarFornecedor() {
     cy.get(el.botaoCadastrarContato).click();
 
@@ -93,9 +89,7 @@ class ContaReceber {
     this.salvar();
   }
 
-  // =============================
-  // CONTA BANCÁRIA
-  // =============================
+  // Criar Conta Bancária
   cadastrarContaBancaria() {
     cy.get(el.botaoCadastrarContaBancaria).click();
 
@@ -108,9 +102,7 @@ class ContaReceber {
     this.salvar();
   }
 
-  // =============================
-  // CENTRO DE CUSTO
-  // =============================
+  // Criar Centro de Custo
   cadastrarCentroCusto() {
     cy.get(el.botaoCadastrarCentroCusto).click();
 
@@ -119,9 +111,8 @@ class ContaReceber {
     this.salvar();
   }
 
-  // =============================
-  // PROPRIEDADE
-  // =============================
+  // Selecionar Propriedade
+
   selecionarPropriedadeDEV() {
     cy.get(el.selectCliente).click();
 
@@ -132,9 +123,7 @@ class ContaReceber {
       .click();
   }
 
-  // =============================
-  // MENU
-  // =============================
+  // Selecionar MENU
   selecionarModuloReceber() {
     cy.contains(el.menuFinanceiro, "Financeiro")
       .closest(".p-panelmenu-header")
@@ -149,9 +138,7 @@ class ContaReceber {
     cy.get("body").find(el.paginatorOptions).contains("30").click();
   }
 
-  // =============================
-  // AÇÕES PRINCIPAIS
-  // =============================
+  // Selecionar Novo Lançamento
   novoLancamentoReceber() {
     this.selecionarModuloReceber();
 
@@ -165,9 +152,7 @@ class ContaReceber {
       .click();
   }
 
-  // =============================
-  // PREENCHIMENTO
-  // =============================
+  // Preenchimento de Titulos
   incluirTitulo() {
     cy.get(el.inputDescricao).type("Titulo Teste");
     cy.get(el.inputValor).clear().type("260");
@@ -229,9 +214,8 @@ class ContaReceber {
     cy.get(el.checkboxPago).check();
   }
 
-  // =============================
   // DROPDOWN
-  // =============================
+
   dropdownCategoria(campo, opcao) {
     cy.get(campo).click().type(opcao);
 
@@ -240,17 +224,15 @@ class ContaReceber {
     cy.contains(el.opcaoPropriedade, opcao).click();
   }
 
-  // =============================
   // PARCELAMENTO
-  // =============================
+
   selecionarParcelamento() {
     cy.contains(el.campoParcelamento).click();
     cy.get(el.inputQtdParcelas).type(2);
   }
 
-  // =============================
   // RECORRÊNCIA
-  // =============================
+
   ativarRecorrencia() {
     cy.get(el.toggleRecorrencia).click();
     cy.get(el.togglePermanente).click();
@@ -261,18 +243,16 @@ class ContaReceber {
     cy.contains(el.opcaoSelect, tipo).click();
   }
 
-  // =============================
   // OBSERVAÇÃO
-  // =============================
+
   observacaoTitulo() {
     cy.contains(el.abaDetalhes).click();
     cy.get(el.inputObservacao).type("Teste Observação");
     this.salvar();
   }
 
-  // =============================
   // AÇÕES TABELA
-  // =============================
+
   duplicarLancamento(nome) {
     cy.contains(el.colunaTabela, nome)
       .parents(el.linhaTabela)
@@ -316,9 +296,8 @@ class ContaReceber {
     cy.contains("button", "Confirmar").click();
   }
 
-  // =============================
   // OUTROS
-  // =============================
+
   reabrirTitulo(nome) {
     cy.contains(el.colunaTabela, nome)
       .parents(el.linhaTabela)
@@ -333,6 +312,22 @@ class ContaReceber {
 
   SelecionarMes() {
     cy.get(".pi-chevron-circle-right").filter(":visible").first().click();
+  }
+
+  SelecionarAnoMes(ano, mes) {
+    cy.get("#periodo input, #periodoMobile input")
+      .first()
+      .click({ force: true });
+
+    cy.get(".p-datepicker-panel").should("be.visible");
+
+    // abre seleção de anos (IMPORTANTE: clicar no header do ano)
+    cy.get("body")
+      .contains(".p-datepicker-select-year", ano.toString())
+      .click({ force: true });
+
+    // depois selecionar mês direto (como no seu HTML)
+    cy.get("body").contains(".p-datepicker-month", mes).click({ force: true });
   }
 }
 
