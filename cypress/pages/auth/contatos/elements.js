@@ -39,5 +39,9 @@ export const elements = {
   inputAccount: "#account",
 
   // Confirmação
-  botaoConfirmar: "button"
+  botaoConfirmar: "button",
+
+  // Verificação de Mensagem (Toast PrimeNG)
+  NotificationTitle: '[data-pc-section="summary"]',
+  NotificationMessage: '[data-pc-section="detail"]',
 }

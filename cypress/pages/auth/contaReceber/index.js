@@ -225,7 +225,6 @@ class ContaReceber {
   }
 
   // PARCELAMENTO
-
   selecionarParcelamento() {
     cy.contains(el.campoParcelamento).click();
     cy.get(el.inputQtdParcelas).type(2);
@@ -244,7 +243,6 @@ class ContaReceber {
   }
 
   // OBSERVAÇÃO
-
   observacaoTitulo() {
     cy.contains(el.abaDetalhes).click();
     cy.get(el.inputObservacao).type("Teste Observação");

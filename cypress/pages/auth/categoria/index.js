@@ -64,7 +64,7 @@ class Categoria {
   novaCategoria() {
     cy.contains(el.botaoAdicionarCategoria, { timeout: 10000 }).click();
 
-    cy.get(el.inputDescricao).should("be.visible").type("Teste Cateegoria");
+    cy.get(el.inputDescricao).should("be.visible").type("Teste Categoria");
 
     this.salvar();
   }
@@ -80,23 +80,30 @@ class Categoria {
   }
 
   // No campo Type e atualiza para um novo nome. No campo .type pode informar o nome da categoria existente e o novo nome.
-  editarCategoria(nome) {
-    cy.contains(el.linhaTabela, nome)
+  editarCategoria(nomeAtual, novaDescricao) {
+    cy.contains(el.linhaTabela, nomeAtual)
       .find(el.botaoEditarIcon)
       .closest("button")
       .click();
 
     // Atualiza a descrição da categoria
-    cy.get(el.inputDescricao)
-      .should("be.visible")
-      .clear()
-      .type("Teste Categoria");
+    cy.get(el.inputDescricao).should("be.visible").clear().type(novaDescricao);
 
     this.salvar();
   }
 
-  // Exclui uma categoria com base no nome informado. 
+  // Exclui uma categoria com base no nome informado.
   excluirCategoria(nome) {
+    cy.contains(el.linhaTabela, nome)
+      .find(el.botaoExcluir)
+      .closest("button")
+      .click();
+
+    this.salvar();
+  }
+
+  // Excluir Categoria com Categoria PAI vinculado.
+  excluirCategoriaPai(nome) {
     cy.contains(el.linhaTabela, nome)
       .find(el.botaoExcluir)
       .closest("button")

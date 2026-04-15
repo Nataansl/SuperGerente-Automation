@@ -9,14 +9,14 @@ describe("Cadastros Conta Pagar", () => {
     contaPagar.visitarPaginaLogin();
     Login.visitarPaginaLoginDEV();
     Login.preencherCredenciasValidarDV();
-    
-        // Desevolvimento (Selecionar Propriedade)
+
+    // Desevolvimento (Selecionar Propriedade)
     //contaPagar.selecionarPropriedadeDEV();
 
-        // Produção (Selecionar Propriedade)
+    // Produção (Selecionar Propriedade)
     // categoria.selecionarPropriedade();
 
-       // Produção (Login)
+    // Produção (Login)
     // Login.preencherCredenciaisValidas();
   });
 
@@ -28,9 +28,8 @@ describe("Cadastros Conta Pagar", () => {
     contaPagar.cadastrarCategoria();
 
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-pagar");
+    inventory.validarContaPagar();
   });
-
 
   // Verificar Categoria Duplicada
   it("Verificar Categoria Duplicada", () => {
@@ -40,9 +39,8 @@ describe("Cadastros Conta Pagar", () => {
     contaPagar.verificarCategoria();
 
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-pagar");
+    inventory.validarContaPagar();
   });
-
 
   // Cadastrar Categoria (TodaRede)
   it("Cadastrar Categoria (TodaRede)", () => {
@@ -52,18 +50,7 @@ describe("Cadastros Conta Pagar", () => {
     contaPagar.cadastrarCategoriaTD();
 
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-pagar");
-  });
-
-  // Verificar registro duplicado
-  it("Cadastro Duplicado", () => {
-    // Act (Agir/Executar)
-    contaPagar.selecionarModuloPagar();
-    contaPagar.novoLancamentoPagar();
-    contaPagar.verificarCategoria();
-
-    // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-pagar");
+    inventory.validarContaPagar();
   });
 
   // Cadastrar Fornecedor
@@ -74,7 +61,7 @@ describe("Cadastros Conta Pagar", () => {
     contaPagar.cadastrarFornecedor();
 
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-pagar");
+    inventory.validarContaPagar();
   });
 
   // Cadastrar Conta Bancaria
@@ -85,7 +72,7 @@ describe("Cadastros Conta Pagar", () => {
     contaPagar.cadastrarContaBancaria();
 
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-pagar");
+    inventory.validarContaPagar();
   });
 
   // Cadastrar Centro de Custo
@@ -96,6 +83,6 @@ describe("Cadastros Conta Pagar", () => {
     contaPagar.cadastrarCentroCusto();
 
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-pagar");
+    inventory.validarContaPagar();
   });
 });

@@ -336,6 +336,7 @@ class ContaPagar {
     this.salvar();
   }
 
+  // Editar Lançamento - Edita a descrição de um lançamento existente baseado no nome informado
   editarLancamento(descricaoAtual, novaDescricao) {
     cy.contains(el.colunaTabela, descricaoAtual)
       .parents(el.linhaTabela)

@@ -23,12 +23,12 @@ class Inventory {
     cy.visit("https://supergerente.hmax.com.br/#/financeiro/contas-receber");
   }
 
-   acessarCategoria() {
+  acessarCategoria() {
     cy.visit("/#/financeiro/categoria-financeiro");
   }
 
   validarUrlCategoria() {
-    cy.url().should('include', '/financeiro/categoria-financeiro');
+    cy.url().should("include", "/financeiro/categoria-financeiro");
   }
 
   validarCentroCusto() {

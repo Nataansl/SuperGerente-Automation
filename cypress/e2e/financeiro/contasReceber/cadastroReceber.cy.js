@@ -3,7 +3,6 @@ import Login from "../../../pages/auth/login";
 import inventory from "../../../pages/inventory";
 
 describe("Cadastros Conta Receber", () => {
-
   beforeEach(() => {
     cy.viewport(1280, 858);
     contaReceber.visitarPaginaLogin();
@@ -17,9 +16,7 @@ describe("Cadastros Conta Receber", () => {
     // Login.preencherCredenciaisValidas();
   });
 
-  // =============================
   // CATEGORIA
-  // =============================
   it("Cadastrar Categoria", () => {
     contaReceber.selecionarModuloReceber();
     contaReceber.novoLancamentoReceber();
@@ -33,10 +30,11 @@ describe("Cadastros Conta Receber", () => {
     contaReceber.novoLancamentoReceber();
     contaReceber.verificarCategoria();
 
-    cy.url().should("include", "/financeiro/contas-receber");
+    // Assert (Verificar/Validar)
+    inventory.validarContaReceber();
   });
 
-  it.only("Cadastrar Categoria (TodaRede)", () => {
+  it("Cadastrar Categoria (TodaRede)", () => {
     contaReceber.selecionarModuloReceber();
     contaReceber.novoLancamentoReceber();
     contaReceber.cadastrarCategoriaTD();
@@ -52,9 +50,7 @@ describe("Cadastros Conta Receber", () => {
     cy.url().should("include", "/financeiro/contas-receber");
   });
 
-  // =============================
   //  FORNECEDOR
-  // =============================
   it("Cadastrar Fornecedor", () => {
     // Act (Agir/Executar)
     contaReceber.selecionarModuloReceber();
@@ -62,31 +58,26 @@ describe("Cadastros Conta Receber", () => {
     contaReceber.cadastrarFornecedor();
 
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-pagar");
+    inventory.validarContaReceber();
   });
 
-
-  // =============================
   // CONTA BANCÁRIA
-  // =============================
   it("Cadastrar Conta Bancaria", () => {
     contaReceber.selecionarModuloReceber();
     contaReceber.novoLancamentoReceber();
     contaReceber.cadastrarContaBancaria();
 
-    cy.url().should("include", "/financeiro/contas-receber");
+    // Assert (Verificar/Validar)
+    inventory.validarContaReceber();
   });
-  
- 
-  // =============================
+
   // CENTRO DE CUSTO
-  // =============================
   it("Cadastrar Centro de Custo", () => {
     contaReceber.selecionarModuloReceber();
     contaReceber.novoLancamentoReceber();
     contaReceber.cadastrarCentroCusto();
 
-    cy.url().should("include", "/financeiro/contas-receber");
+    // Assert (Verificar/Validar)
+    inventory.validarContaReceber();
   });
-
 });

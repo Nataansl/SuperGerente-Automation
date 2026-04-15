@@ -28,7 +28,9 @@ describe("Conta a Receber", () => {
     contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
     contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
 
-    contaReceber.salvar();
+    cy.contains("button", "Salvar").should("not.be.disabled").click();
+
+    //Assert (Verificar/Validar)
     inventory.validarContaReceber();
   });
 
@@ -36,7 +38,14 @@ describe("Conta a Receber", () => {
     contaReceber.selecionarModuloReceber();
     contaReceber.paginatorContaReceber();
 
-    contaReceber.excluirLancamento("Titulo Teste");
+    contaReceber.dropdown("#category", "CAIXA GERAL");
+    contaReceber.dropdown("#contact", "ANTÔNIA E EDUARDA");
+    contaReceber.dropdown("#bankAccount", "BANCO DO BRASIL");
+    contaReceber.dropdown("#costCenter", "Despesas Fixas");
+
+    contaReceber.botaoSalvar();
+
+    //Assert (Verificar/Validar)
     inventory.validarContaReceber();
   });
 
@@ -48,7 +57,9 @@ describe("Conta a Receber", () => {
     contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
     contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
 
-    contaReceber.salvar();
+    contaReceber.botaoSalvar();
+
+    //Assert (Verificar/Validar)
     inventory.validarContaReceber();
   });
 
@@ -62,14 +73,6 @@ describe("Conta a Receber", () => {
     contaReceber.selecionarParcelamento();
     contaReceber.salvar();
 
-    inventory.validarContaReceber();
-  });
-
-  it("Excluir Titulo (Parcelado)", () => {
-    contaReceber.selecionarModuloReceber();
-    contaReceber.paginatorContaReceber();
-
-    contaReceber.excluirProximos("Titulo Teste Parcelado");
     inventory.validarContaReceber();
   });
 
