@@ -32,5 +32,5 @@ export const elements = {
 
   // Ações
   botaoEditarIcon: ".pi-pen-to-square",
-  botaoExcluir: ".pi-pen-to-square",
+  botaoExcluir: ".pi-trash",
 };

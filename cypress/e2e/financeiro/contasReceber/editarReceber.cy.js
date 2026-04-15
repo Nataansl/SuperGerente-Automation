@@ -28,7 +28,7 @@ describe("Editar Receber", () => {
     contaReceber.botaoSalvar();
 
     // Assert
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   it("Editar", () => {

@@ -6,7 +6,7 @@ class SistemaGeral {
     cy.visit(el.urlDV);
   }
 
-  // Define a quantidade de registros exibidos (30 por página)
+  // Visualizar todos os registro incluido no sistema e selecionar a opção 30 por página.
   paginator() {
     cy.get(el.paginatorDropdown, { timeout: 10000 }).click();
 
@@ -16,7 +16,7 @@ class SistemaGeral {
       .click();
   }
 
-  // Seleciona a propriedade produção
+  // Selecionar a propriedade no ambiente de produção.
   selecionarPropriedade() {
     cy.get(el.selectCliente, { timeout: 10000 }).should("be.visible").click();
 
@@ -29,7 +29,7 @@ class SistemaGeral {
       .click();
   }
 
-  // Selecionar a propriedade DEV
+  // Selecionar a propriedade no ambiente de desenvolvimento. 
   selecionarPropriedadeDEV() {
     cy.get(el.selectCliente, { timeout: 10000 }).should("be.visible").click();
 
@@ -40,22 +40,6 @@ class SistemaGeral {
     cy.contains(el.botaoConfirmarPropriedade, "Confirmar propriedade")
       .should("not.be.disabled")
       .click();
-  }
-
-  // Validar Messagem
-  validarMensagem(mensagem) {
-    cy.get(el.validarMessagem, { timeout: 10000 })
-      .should("be.visible")
-      .and("contain", "Atenção");
-
-    cy.get(el.validarMensagemTexto)
-      .should("be.visible")
-      .and(
-        "contain",
-        "Uma mensagem foi enviada ao seu e-mail com o código para resetar sua senha",
-      );
-
-    cy.get(el.confirmarMessagem).click();
   }
 }
 

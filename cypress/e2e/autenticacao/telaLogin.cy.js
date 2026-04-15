@@ -5,7 +5,7 @@ describe("Login", () => {
   // Executa antes de cada teste
   beforeEach(() => {});
 
-  // Login de Desenvolvimento
+  // Login Ambiente de Desenvolvimento
   it("Realizar login com sucesso", () => {
     // Act
     Login.visitarPaginaLoginDEV();
@@ -15,8 +15,7 @@ describe("Login", () => {
     inventory.validarPagina();
   });
 
-  // Login de Produção
-
+  // Login Ambiente de Produção
   it("Realizar login com sucesso", () => {
     // Act
     Login.visitarPaginaLoginPR();
@@ -26,6 +25,7 @@ describe("Login", () => {
     inventory.validarPagina();
   });
 
+  // Senha ou Email com informações inválidas
   it("Realizar login com falha", () => {
     // Act
     Login.visitarPaginaLoginDEV();
@@ -36,6 +36,7 @@ describe("Login", () => {
     inventory.validarPagina();
   });
 
+  // Login com campos vazios 
   it("Realizar login com campos vazios", () => {
     // Act
     Login.visitarPaginaLoginDEV();

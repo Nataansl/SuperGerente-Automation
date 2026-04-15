@@ -40,7 +40,7 @@ describe("Excluir Conta Pagar", () => {
 
     // Na Classe EcluirLancamento pode informar o nome do Titulo para excluir.  
     // Excluir Lançamento Pago
-    contaPagar.excluirLancamentoPago("ANTECIPACAO CONTA 20754 (01)");
+    contaPagar.excluirLancamentoPago("Título Teste Pago");
 
     // Assert
     cy.url().should("include", "/financeiro/contas-pagar");

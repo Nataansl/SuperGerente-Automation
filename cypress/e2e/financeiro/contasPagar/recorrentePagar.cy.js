@@ -20,31 +20,34 @@ describe("Conta a Pagar Recorrente", () => {
     // Login.preencherCredenciaisValidas();
   });
 
+    // Validar o campo (Semanal)
   it("Lançamentos Recorrente (Semanal)", () => {
     // Act (Agir/Executar)
     contaPagar.novoLancamentoPagar();
     contaPagar.ativarRecorrencia();
     contaPagar.selecionarFrequencia("Semanal");
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-pagar");
+    inventory.validarContaPagar();
   });
-
+    
+   // Validar o campo (Mensal) 
   it("Lançamentos Recorrente (Mensal)", () => {
     // Act (Agir/Executar)
     contaPagar.novoLancamentoPagar();
     contaPagar.ativarRecorrencia();
     contaPagar.selecionarFrequencia("Mensal");
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-pagar");
+    inventory.validarContaPagar();
   });
 
+    // Validar o campo (Anual)
   it("Lançamentos Recorrente (Anual)", () => {
     // Act (Agir/Executar)
     contaPagar.novoLancamentoPagar();
     contaPagar.ativarRecorrencia();
     contaPagar.selecionarFrequencia("Anual");
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-pagar");
+    inventory.validarContaPagar();
   });
 
 
@@ -65,7 +68,7 @@ describe("Conta a Pagar Recorrente", () => {
     contaPagar.salvar();
 
     //Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-pagar");
+    inventory.validarContaPagar();
   });
 
   it("Recorrencia Permanente (Semanal)", () => {
@@ -84,7 +87,7 @@ describe("Conta a Pagar Recorrente", () => {
     contaPagar.selecionarFrequencia("Semanal");
 
     //Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-pagar");
+    inventory.validarContaPagar();
   });
 
   it("Recorrencia Permanente (Anual)", () => {
@@ -103,7 +106,7 @@ describe("Conta a Pagar Recorrente", () => {
     contaPagar.selecionarFrequencia("Anual");
 
     //Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-pagar");
+    inventory.validarContaPagar();
   });
 
   it("Recorrencia Permanente (Mensal)", () => {
@@ -122,6 +125,6 @@ describe("Conta a Pagar Recorrente", () => {
     contaPagar.selecionarFrequencia("Mensal");
 
     //Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-pagar");
+    inventory.validarContaPagar();
   });
 });

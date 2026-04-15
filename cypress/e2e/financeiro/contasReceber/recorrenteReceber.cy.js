@@ -27,7 +27,7 @@ describe("Conta a Receber Recorrente", () => {
     contaReceber.selecionarFrequencia("Semanal");
 
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   it("Lançamentos Recorrente (Mensal)", () => {
@@ -37,7 +37,7 @@ describe("Conta a Receber Recorrente", () => {
     contaReceber.selecionarFrequencia("Mensal");
 
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   it("Lançamentos Recorrente (Anual)", () => {
@@ -47,7 +47,7 @@ describe("Conta a Receber Recorrente", () => {
     contaReceber.selecionarFrequencia("Anual");
 
     // Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   it("Incluir Titulo (Recorrente)", () => {
@@ -63,7 +63,7 @@ describe("Conta a Receber Recorrente", () => {
     contaReceber.frequenciaRecorrente();
 
     //Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   it("Recorrencia Permanente (Diario)", () => {
@@ -80,7 +80,7 @@ describe("Conta a Receber Recorrente", () => {
     contaReceber.frequenciaDiario();
 
     //Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   it("Recorrencia Permanente (Semanal)", () => {
@@ -97,7 +97,7 @@ describe("Conta a Receber Recorrente", () => {
     contaReceber.frequenciaSemanal();
 
     //Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   it("Recorrencia Permanente (Mensal)", () => {
@@ -114,7 +114,7 @@ describe("Conta a Receber Recorrente", () => {
     contaReceber.frequenciaMesal();
 
     //Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 
   it("Recorrencia Permanente (Anual)", () => {
@@ -130,6 +130,6 @@ describe("Conta a Receber Recorrente", () => {
     contaReceber.ativarRecorrencia();
     contaReceber.frequenciaAnual();
     //Assert (Verificar/Validar)
-    cy.url().should("include", "/financeiro/contas-receber");
+    inventory.validarContaReceber();
   });
 });

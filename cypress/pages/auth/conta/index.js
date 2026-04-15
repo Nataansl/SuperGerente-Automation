@@ -52,14 +52,14 @@ class Conta {
   }
 
   // Edita uma conta existente com base no nome informado
-  editarConta(nome) {
-    cy.contains(el.linhaTabela, nome)
+  editarConta(nomeAtual, nomeNovo) {
+    cy.contains(el.linhaTabela, nomeAtual)
       .find(el.botaoEditarIcon)
       .closest("button")
       .click();
 
     // Atualiza a descrição da categoria
-    cy.get(el.inputNome).should("be.visible").clear().type("Teste Conta11");
+    cy.get(el.inputNome).should("be.visible").clear().type(nomeNovo);
 
     this.salvar();
   }
@@ -70,13 +70,34 @@ class Conta {
       .should("be.visible")
       .click();
 
-    cy.get(el.inputNome).should("be.visible").type("Teste Conta1");
+    cy.get(el.inputNome).should("be.visible").type("Teste Conta Bancaria");
     cy.get(el.inputBankCode).type("100");
     cy.get(el.inputBankName).type("Teste Conta");
     cy.get(el.inputAgency).type("1234-5");
     cy.get(el.inputAccount).type("123456-7");
 
     this.salvar();
+  }
+
+  // Cadastra uma nova conta bancária (Duplicada)
+  novaContaDuplica() {
+    cy.contains(el.botaoAdicionarConta, { timeout: 10000 })
+      .should("be.visible")
+      .click();
+
+    cy.get(el.inputNome).should("be.visible").type("Teste Conta Bancaria");
+    cy.get(el.inputBankCode).type("100");
+    cy.get(el.inputBankName).type("Teste Conta");
+    cy.get(el.inputAgency).type("1234-5");
+    cy.get(el.inputAccount).type("123456-7");
+
+    this.salvar();
+
+    cy.get(el.NotificationTitle).should("be.visible").and("contain", "Atenção");
+
+    cy.get(el.NotificationMessage, { timeout: 10000 })
+      .should("be.visible")
+      .and("contain", "Já existe um conta bancaria com esse nome.");
   }
 
   // Exclui uma conta com base no nome informado
@@ -86,7 +107,7 @@ class Conta {
       .closest("button")
       .click();
 
-    this.salvar();
+    cy.contains(el.botaoConfirmar, "Confirmar").click();
   }
 
   // Ação padrão de salvar

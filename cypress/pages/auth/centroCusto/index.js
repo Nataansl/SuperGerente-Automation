@@ -54,14 +54,14 @@ class CentroCusto {
   }
 
   // Edita um centro de custo com base no nome informado
-  editarCentroCusto(nome) {
-    cy.contains(el.linhaTabela, nome)
+  editarCentroCusto(nomeAtual, nomeNovo) {
+    cy.contains(el.linhaTabela, nomeAtual)
       .find(el.botaoEditar)
       .closest("button")
       .click();
 
     // Atualiza o nome do centro de custo
-    cy.get(el.inputNome).should("be.visible").clear().type("Teste Centro de Custo");
+    cy.get(el.inputNome).should("be.visible").clear().type(nomeNovo);
 
     this.salvar();
   }
