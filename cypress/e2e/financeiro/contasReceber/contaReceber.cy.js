@@ -10,72 +10,69 @@ describe("Conta a Receber", () => {
     contaReceber.visitarPaginaLogin();
     Login.visitarPaginaLoginDEV();
     Login.preencherCredenciasValidarDV();
+  });
 
-    it("Conta A Receber", () => {
-      // Act
-      contaReceber.novoLancamentoReceber();
-
-      // Assert (Verificar/Validar)
-      inventory.validarContaReceber();
-    });
-
-    it("Incluir Titulo A Receber", () => {
-      contaReceber.novoLancamentoReceber();
-      contaReceber.incluirTitulo();
-
-      contaReceber.dropdownCategoria("#category", "Categoria Teste");
-      contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
-      contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
-
-      cy.contains("button", "Salvar").should("not.be.disabled").click();
-
-      //Assert (Verificar/Validar)
-      inventory.validarContaReceber();
-    });
-
-    it("Excluir Titulo", () => {
-      contaReceber.selecionarModuloReceber();
-      contaReceber.paginatorContaReceber();
-
-      contaReceber.dropdown("#category", "CAIXA GERAL");
-      contaReceber.dropdown("#contact", "ANTÔNIA E EDUARDA");
-      contaReceber.dropdown("#bankAccount", "BANCO DO BRASIL");
-      contaReceber.dropdown("#costCenter", "Despesas Fixas");
-
-      contaReceber.botaoSalvar();
-
-      //Assert (Verificar/Validar)
-      inventory.validarContaReceber();
-    });
-
-    it("Incluir Titulo (Pago)", () => {
-      contaReceber.novoLancamentoReceber();
-      contaReceber.incluirTituloPago();
-
-      contaReceber.dropdownCategoria("#category", "Categoria Teste");
-      contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
-      contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
-
-      contaReceber.botaoSalvar();
-
-      //Assert (Verificar/Validar)
-      inventory.validarContaReceber();
-    });
-
-    it("Conta a Receber (Parcelamento)", () => {
-      contaReceber.novoLancamentoReceber();
-      contaReceber.incluirTituloParcelado();
-
-      contaReceber.dropdownCategoria("#category", "Categoria Teste");
-      contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
-
-      contaReceber.selecionarParcelamento();
-      contaReceber.salvar();
-
-      inventory.validarContaReceber();
-    });
+  it("Conta A Receber", () => {
+    // Act
+    contaReceber.novoLancamentoReceber();
 
     // Assert (Verificar/Validar)
+    inventory.validarContaReceber();
+  });
+
+  it("Incluir Titulo A Receber", () => {
+    contaReceber.novoLancamentoReceber();
+    contaReceber.incluirTitulo();
+
+    contaReceber.dropdownCategoria("#category", "Categoria Teste");
+    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
+    contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
+
+    cy.contains("button", "Salvar").should("not.be.disabled").click();
+
+    //Assert (Verificar/Validar)
+    inventory.validarContaReceber();
+  });
+
+  it("Excluir Titulo", () => {
+    contaReceber.selecionarModuloReceber();
+    contaReceber.paginatorContaReceber();
+
+    contaReceber.dropdown("#category", "CAIXA GERAL");
+    contaReceber.dropdown("#contact", "ANTÔNIA E EDUARDA");
+    contaReceber.dropdown("#bankAccount", "BANCO DO BRASIL");
+    contaReceber.dropdown("#costCenter", "Despesas Fixas");
+
+    contaReceber.botaoSalvar();
+
+    //Assert (Verificar/Validar)
+    inventory.validarContaReceber();
+  });
+
+  it("Incluir Titulo (Pago)", () => {
+    contaReceber.novoLancamentoReceber();
+    contaReceber.incluirTituloPago();
+
+    contaReceber.dropdownCategoria("#category", "Categoria Teste");
+    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
+    contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
+
+    contaReceber.botaoSalvar();
+
+    //Assert (Verificar/Validar)
+    inventory.validarContaReceber();
+  });
+
+  it("Conta a Receber (Parcelamento)", () => {
+    contaReceber.novoLancamentoReceber();
+    contaReceber.incluirTituloParcelado();
+
+    contaReceber.dropdownCategoria("#category", "Categoria Teste");
+    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
+
+    contaReceber.selecionarParcelamento();
+    contaReceber.salvar();
+
     inventory.validarContaReceber();
   });
 

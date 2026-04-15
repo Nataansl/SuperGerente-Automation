@@ -39,15 +39,61 @@ class Inventory {
     cy.visit("https://supergerente.hmax.com.br/#/financeiro/contatos");
   }
 
-  validarContasBancarias() {
-    cy.url().should("include", "/financeiro/contas-bancaria");
+  validarHome() {
+    cy.visit("https://hmax-api-hub-dev.web.app/#/home");
   }
 
-  validarContato() {
-    cy.visit("https://supergerente.hmax.com.br/#/financeiro/contatos");
+  validarResultados() {
+    cy.visit("https://hmax-api-hub-dev.web.app/#/resultado");
+  }
+
+  validarTarifaMedia() {
+    cy.visit("https://hmax-api-hub-dev.web.app/#/tarifas");
+  }
+
+  validarReceitas() {
+    cy.visit("https://hmax-api-hub-dev.web.app/#/receitas");
+  }
+
+  validarDespesas() {
+    cy.visit("https://hmax-api-hub-dev.web.app/#/despesas");
+  }
+
+  validarRevenue() {
+    cy.visit("https://hmax-api-hub-dev.web.app/#/revenue");
+  }
+
+  validarParceiros() {
+    cy.visit("https://hmax-api-hub-dev.web.app/#/parceiros");
+  }
+
+  validarUsuarios() {
+    cy.visit("https://hmax-api-hub-dev.web.app/#/usuarios");
+  }
+
+ validarDisponibilidade() {
+    cy.visit("https://hmax-api-hub-dev.web.app/#/disponibilidade");
+  }
+
+ validarTiposdeApartamento() {
+    cy.visit("https://hmax-api-hub-dev.web.app/#/tipo-apartamento");
+  }
+
+validarAgentes() {
+    cy.visit("https://hmax-api-hub-dev.web.app/#/painel/agente");
+  }
+
+validarPlanodeConta() {
+    cy.visit("https://hmax-api-hub-dev.web.app/#/painel/plano-conta");
+  }
+
+validarApartamentos() {
+    cy.visit("https://hmax-api-hub-dev.web.app/#/painel/apartamento");
   }
   
-
-
+validarSobre() {
+    cy.visit("https://hmax-api-hub-dev.web.app/#/about");
+  }
+  
 }
 export default new Inventory();
