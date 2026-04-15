@@ -336,20 +336,21 @@ class ContaPagar {
     this.salvar();
   }
 
-  // Edita um lançamento existente
+  // Editar Lançamento - Edita a descrição de um lançamento existente baseado no nome informado
   editarLancamento(descricaoAtual, novaDescricao) {
-    // Encontrar a linha com a descrição
-    cy.contains(elements.colunaTabela, descricaoAtual)
-      .parents(elements.linhaTabela)
+    cy.contains(el.colunaTabela, descricaoAtual)
+      .parents(el.linhaTabela)
       .within(() => {
-        cy.get(elements.botaoEditar).click();
+        cy.get(el.botaoEditar).click();
       });
 
-    // Editar descrição
-    cy.get(elements.inputDescricao).clear().type(novaDescricao);
+    // Garantir que o modal abriu
+    cy.get(".p-dialog").should("be.visible");
 
-    // Salvar
-    cy.contains(elements.botaoSalvar, "Salvar").click();
+    // Agora o campo fica acessível
+    cy.get(el.inputDescricao).type(novaDescricao);
+
+    cy.contains("button", "Salvar").should("be.visible").click();
   }
 
   // Exclui um lançamento específico
@@ -572,6 +573,10 @@ class ContaPagar {
 
   ExcluirTudo() {
     cy.contains(el.Confirmar, "Excluir Tudo").should("not.be.disabled").click();
+  }
+
+  SelecionarMes() {
+    cy.get(".pi-chevron-circle-right").filter(":visible").first().click();
   }
 }
 

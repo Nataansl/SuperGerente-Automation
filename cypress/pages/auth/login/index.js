@@ -51,7 +51,7 @@ class Login {
       .click();
   }
 
-  // Credenciais inválidas (Email ou senha incorretos) 
+  // Credenciais inválidas (Email ou senha incorretos)
   // TASK (): Criar função para gerar email e senha aleatórios.
   preencherCredenciaisInvalidas(email, senha) {
     cy.get(el.emailInput).type("user.invalid@gmail.com");

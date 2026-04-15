@@ -9,18 +9,18 @@ describe("Cadastros Conta Pagar", () => {
     contaPagar.visitarPaginaLogin();
     Login.visitarPaginaLoginDEV();
     Login.preencherCredenciasValidarDV();
-    
-        // Desevolvimento (Selecionar Propriedade)
+
+    // Desevolvimento (Selecionar Propriedade)
     //contaPagar.selecionarPropriedadeDEV();
 
-        // Produção (Selecionar Propriedade)
+    // Produção (Selecionar Propriedade)
     // categoria.selecionarPropriedade();
 
-       // Produção (Login)
+    // Produção (Login)
     // Login.preencherCredenciaisValidas();
   });
 
-  // Cadastrar Categoria 
+  // Cadastrar Categoria
   it("Cadastrar Categoria", () => {
     // Act (Agir/Executar)
     contaPagar.selecionarModuloPagar();
@@ -31,9 +31,8 @@ describe("Cadastros Conta Pagar", () => {
     inventory.validarContaPagar();
   });
 
-
   // Verificar Categoria Duplicada
-   ("Verificar Categoria Duplicada", () => {
+  it("Verificar Categoria Duplicada", () => {
     // Act (Agir/Executar)
     contaPagar.selecionarModuloPagar();
     contaPagar.novoLancamentoPagar();
@@ -42,7 +41,6 @@ describe("Cadastros Conta Pagar", () => {
     // Assert (Verificar/Validar)
     inventory.validarContaPagar();
   });
-
 
   // Cadastrar Categoria (TodaRede)
   it("Cadastrar Categoria (TodaRede)", () => {
@@ -55,7 +53,6 @@ describe("Cadastros Conta Pagar", () => {
     inventory.validarContaPagar();
   });
 
-
   // Cadastrar Fornecedor
   it("Cadastrar Fornecedor", () => {
     // Act (Agir/Executar)
@@ -66,7 +63,6 @@ describe("Cadastros Conta Pagar", () => {
     // Assert (Verificar/Validar)
     inventory.validarContaPagar();
   });
-
 
   // Cadastrar Conta Bancaria
   it("Cadastrar Conta Bancaria", () => {
@@ -79,7 +75,6 @@ describe("Cadastros Conta Pagar", () => {
     inventory.validarContaPagar();
   });
 
-
   // Cadastrar Centro de Custo
   it("Cadastrar Centro de Custo", () => {
     // Act (Agir/Executar)
@@ -90,5 +85,4 @@ describe("Cadastros Conta Pagar", () => {
     // Assert (Verificar/Validar)
     inventory.validarContaPagar();
   });
-
 });

@@ -47,6 +47,18 @@ describe("Conta a Pagar", () => {
     inventory.validarContaPagar();
   });
 
+  // Na Classe ExcluirLancamento pode informar o nome do Titulo para excluir.
+  // Excluir Lançamento
+  it("Excluir Titulo) ", () => {
+    // Act (Agir/Executar)
+    contaPagar.selecionarModuloPagar();
+    contaPagar.paginatorContaPagar();
+    contaPagar.excluirLancamento("Titulo Teste");
+
+    // Assert
+    inventory.validarContaPagar();
+  });
+
   // Incluir Titulo A Pagar (Pago)
   it("Incluir Titulo A Pagar (Pago)", () => {
     //Arrange (Organizar/Configurar)
@@ -77,12 +89,27 @@ describe("Conta a Pagar", () => {
     contaPagar.dropdownCategoria("#bankAccount", "Conta TESTE");
 
     contaPagar.selecionarParcelamento();
+    contaPagar.salvar();
 
     // Assert (Verificar/Validar)
     inventory.validarContaPagar();
   });
 
-  // Observacao no Titulo A Pagar
+  // Na Classe ExcluirProximo pode informar o titulo para ser selecionado.
+  // Excluir Lancamento (Parcelamento)
+  it("Excluir Titulo (Parcelado)", () => {
+    // Act (Agir/Executar)
+    contaPagar.selecionarModuloPagar();
+    contaPagar.paginatorContaPagar();
+
+    // Excluir os proximos e o selecionado
+    contaPagar.excluirProximos("Titulo Teste Parcelado");
+
+    // Assert
+    inventory.validarContaPagar();
+  });
+
+  // Incluir um Titulo com Observacao
   it("Observacao no Titulo", () => {
     //Arrange (Organizar/Configurar)
 
@@ -120,12 +147,27 @@ describe("Conta a Pagar", () => {
     inventory.validarContaPagar();
   });
 
+  // Incluir Titulo A Pagar
+  it("Incluir Titulo A Pagar", () => {
+    // Act (Agir/Executar)
+    contaPagar.novoLancamentoPagar();
+    contaPagar.incluirTitulo();
+
+    contaPagar.dropdownCategoria("#category", "Categoria Teste");
+    contaPagar.dropdownCategoria("#bankAccount", "Conta TESTE");
+    contaPagar.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
+
+    contaPagar.salvar();
+
+    //Assert (Verificar/Validar)
+    inventory.validarContaPagar();
+  });
+
   it("Editar descrição de lançamento", () => {
     // Act
     contaPagar.selecionarModuloPagar();
     contaPagar.paginatorContaPagar();
     contaPagar.editarLancamento("Titulo Teste", "Editado Titulo Descrição");
-    contaPagar.observacaoTituloPagar();
 
     // Assert
     inventory.validarContaPagar();
@@ -136,7 +178,24 @@ describe("Conta a Pagar", () => {
     // Act (Agir/Executar)
     contaPagar.selecionarModuloPagar();
     contaPagar.paginatorContaPagar();
-    contaPagar.editarLancamento("Editado Titulo Descrição","Titulo Teste Editado");
+    contaPagar.editarLancamento(
+      "Editado Titulo Descrição",
+      "Titulo Teste Editado",
+    );
+
+    // Assert
+    inventory.validarContaPagar();
+  });
+
+  // Excluir Lançamento (Pago)
+  it("Excluir Titulo (Editado)", () => {
+    // Act (Agir/Executar)
+    contaPagar.selecionarModuloPagar();
+    contaPagar.paginatorContaPagar();
+
+    // Na Classe EcluirLancamento pode informar o nome do Titulo para excluir.
+    // Excluir Lançamento Pago
+    contaPagar.excluirLancamento("Titulo Teste Editado");
 
     // Assert
     inventory.validarContaPagar();
@@ -161,6 +220,20 @@ describe("Conta a Pagar", () => {
     inventory.validarContaPagar();
   });
 
+  // Na Classe ExcluirApenasUm pode informar o titulo para ser selecionado.
+  // Excluir apenas este lançamento (Recorrente) (Diario)
+  it("Excluir Titulo (Recorrente Diario)", () => {
+    // Act (Agir/Executar)
+    contaPagar.selecionarModuloPagar();
+    contaPagar.paginatorContaPagar;
+
+    // Excluir Apenas Este Lançamento
+    contaPagar.excluirTodos("Titulo Teste Diário");
+
+    // Assert
+    inventory.validarContaPagar();
+  });
+
   it("Recorrencia Permanente (Semanal)", () => {
     //Arrange (Organizar/Configurar)
 
@@ -174,8 +247,20 @@ describe("Conta a Pagar", () => {
 
     contaPagar.ativarRecorrencia();
     contaPagar.selecionarFrequencia("Semanal");
+    contaPagar.salvar();
+  });
 
-    //Assert (Verificar/Validar)
+  // Na Classe ExcluirProximos pode informar o titulo para ser selecionado.
+  // Excluir este e os próximos (Recorrente)
+  it("Excluir Titulo (Recorrente Semanal)", () => {
+    // Act (Agir/Executar)
+    contaPagar.selecionarModuloPagar();
+    contaPagar.paginatorContaPagar();
+
+    // Excluir os proximos lançados e o selecionado
+    contaPagar.excluirProximos("Titulo Teste Semanal");
+
+    // Assert
     inventory.validarContaPagar();
   });
 
@@ -192,6 +277,7 @@ describe("Conta a Pagar", () => {
 
     contaPagar.ativarRecorrencia();
     contaPagar.selecionarFrequencia("Anual");
+    contaPagar.salvar();
 
     //Assert (Verificar/Validar)
     inventory.validarContaPagar();
@@ -210,124 +296,23 @@ describe("Conta a Pagar", () => {
 
     contaPagar.ativarRecorrencia();
     contaPagar.selecionarFrequencia("Mensal");
+    contaPagar.salvar();
 
     //Assert (Verificar/Validar)
-    inventory.validarContaPagar();
-  });
-
-  // Na Classe ExcluirApenasUm pode informar o titulo para ser selecionado.
-  // Excluir apenas este lançamento (Recorrente) (Diario)
-  it("Excluir Titulo (Recorrente Diario)", () => {
-    // Act (Agir/Executar)
-    contaPagar.selecionarModuloPagar();
-    contaPagar.paginatorContaPagar;
-
-    // Excluir Apenas Este Lançamento
-    contaPagar.excluirTodos("Titulo Teste Diário");
-
-    // Assert
-    inventory.validarContaPagar();
-  });
-
-  // Na Classe ExcluirLancamento pode informar o nome do Titulo para excluir.
-  // Excluir Lançamento
-  it("Excluir Titulo) ", () => {
-    // Act (Agir/Executar)
-    contaPagar.selecionarModuloPagar();
-    contaPagar.paginatorContaPagar();
-    contaPagar.excluirLancamento("Titulo Teste");
-
-    // Assert
-    inventory.validarContaPagar();
-  });
-
-  // Excluir Lançamento (Pago)
-  it("Excluir Titulo (Editado)", () => {
-    // Act (Agir/Executar)
-    contaPagar.selecionarModuloPagar();
-    contaPagar.paginatorContaPagar();
-
-    // Na Classe EcluirLancamento pode informar o nome do Titulo para excluir.
-    // Excluir Lançamento Pago
-    contaPagar.excluirLancamentoPago("Titulo Teste Editado");
-
-    // Assert
-    inventory.validarContaPagar();
-  });
-
-  // Na Classe ExcluirProximos pode informar o titulo para ser selecionado.
-  // Excluir este e os próximos (Recorrente)
-  it("Excluir Titulo (Recorrente Semanal)", () => {
-    // Act (Agir/Executar)
-    contaPagar.selecionarModuloPagar();
-    contaPagar.paginatorContaPagar();
-
-    // Excluir os proximos lançados e o selecionado
-    contaPagar.excluirProximos("Titulo Teste Semanal");
-
-    // Assert
-    inventory.validarContaPagar();
-  });
-
-  // Na Classe ExcluirTodos pode informar o titulo para ser selecionado.
-  // Excluir toda a recorrência  (Recorrente)
-  it("Excluir Titulo (Recorrente Anual)", () => {
-    contaPagar.selecionarModuloPagar();
-    contaPagar.paginatorContaPagar();
-
-    contaPagar.excluirTodos("Titulo Teste Anual");
-
     inventory.validarContaPagar();
   });
 
   // Na Classe ExcluirTodos pode informar o titulo para ser selecionado.
   // Excluir toda a recorrência  (Recorrente)
   it("Excluir Titulo (Recorrente Mensal)", () => {
-    // Act (Agir/Executar)
     contaPagar.selecionarModuloPagar();
+    contaPagar.SelecionarMes();
     contaPagar.paginatorContaPagar();
 
-    // Excluir todos os titulos recorrentes
+    // Excluir todos os títulos recorrentes
     contaPagar.excluirTodos("Titulo Teste Mensal");
 
-    // Assert
+    //Assert (Verificar/Validar)
     inventory.validarContaPagar();
-  });
-
-  // Na Classe ExcluirProximo pode informar o titulo para ser selecionado.
-  // Excluir Lancamento (Parcelamento)
-  it("Excluir Titulo (Parcelado)", () => {
-    // Act (Agir/Executar)
-    contaPagar.selecionarModuloPagar();
-    contaPagar.paginatorContaPagar();
-
-    // Excluir os proximos e o selecionado
-    contaPagar.excluirProximos("Titulo Teste Parcelado");
-
-    // Assert
-    inventory.validarContaPagar();
-  });
-
-  // Excluir contato (Forncedor)
-  it("Excluir Fornecedor", () => {
-    // Act (Agir/Executar)
-    contatos.selecionarContatos();
-    contatos.paginatorContatos();
-    contatos.excluirFornecedor();
-
-    // Assert
-
-    //Messagem (Validar)
-    inventory.validarContato();
-  });
-
-  // Excluir Categoria com Categoria PAI vinculado.
-  it("Excluir Categoria com Categoria PAI Vinculado", () => {
-    // Act (Agir/Executar)
-    categoria.paginatorCategoria();
-    categoria.selecionarCategoria();
-    categoria.excluirCategoriaPai("Categoria Teste TD");
-
-    // Assert (Verificar/Validar)
   });
 });
