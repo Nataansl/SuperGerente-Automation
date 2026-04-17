@@ -33,6 +33,9 @@ describe("Criar Contatos", () => {
     // Act (Agir/Executar)
     contatos.selecionarContatos();
     contatos.adicionarContatoDuplicado();
+
+    // Assert
+    inventory.validarContato(); 
   });
 
   it("Editar Contato", () => {

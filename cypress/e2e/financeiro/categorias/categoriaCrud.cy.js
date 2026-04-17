@@ -29,6 +29,17 @@ describe("Criar Categoria", () => {
     inventory.validarUrlCategoria();
   });
   
+
+    it("Nova Categoria", () => {
+    // Act (Agir/Executar)
+    categoria.novaCategoriaReceita();
+
+    // Assert
+    inventory.validarUrlCategoria();
+  });
+
+
+
   it("Categoria Duplicada", () => {
     // Act (Agir/Executar)
     categoria.categoriaDuplicada();

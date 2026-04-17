@@ -138,4 +138,4 @@ class ValidarModulos {
   }
 }
 
-export default new SistemaGeral();
+export default new ValidarModulos();

@@ -24,8 +24,8 @@ describe("Conta a Receber", () => {
     contaReceber.novoLancamentoReceber();
     contaReceber.incluirTitulo();
 
-    contaReceber.dropdownCategoria("#category", "Categoria Teste");
-    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
+    contaReceber.dropdownCategoria("#category", "Teste CategoriaR");
+    contaReceber.dropdownCategoria("#bankAccount", "Teste Conta Bancaria");
     contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
 
     cy.contains("button", "Salvar").should("not.be.disabled").click();
@@ -37,13 +37,7 @@ describe("Conta a Receber", () => {
   it("Excluir Titulo", () => {
     contaReceber.selecionarModuloReceber();
     contaReceber.paginatorContaReceber();
-
-    contaReceber.dropdown("#category", "CAIXA GERAL");
-    contaReceber.dropdown("#contact", "ANTÔNIA E EDUARDA");
-    contaReceber.dropdown("#bankAccount", "BANCO DO BRASIL");
-    contaReceber.dropdown("#costCenter", "Despesas Fixas");
-
-    contaReceber.botaoSalvar();
+    contaReceber.excluirLancamento("Titulo Teste");
 
     //Assert (Verificar/Validar)
     inventory.validarContaReceber();
@@ -53,11 +47,11 @@ describe("Conta a Receber", () => {
     contaReceber.novoLancamentoReceber();
     contaReceber.incluirTituloPago();
 
-    contaReceber.dropdownCategoria("#category", "Categoria Teste");
-    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
+    contaReceber.dropdownCategoria("#category", "Teste CategoriaR");
+    contaReceber.dropdownCategoria("#bankAccount", "Teste Conta Bancaria");
     contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
 
-    contaReceber.botaoSalvar();
+    contaReceber.salvar();
 
     //Assert (Verificar/Validar)
     inventory.validarContaReceber();
@@ -67,8 +61,8 @@ describe("Conta a Receber", () => {
     contaReceber.novoLancamentoReceber();
     contaReceber.incluirTituloParcelado();
 
-    contaReceber.dropdownCategoria("#category", "Categoria Teste");
-    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
+    contaReceber.dropdownCategoria("#category", "Teste CategoriaR");
+    contaReceber.dropdownCategoria("#bankAccount", "Teste Conta Bancaria");
 
     contaReceber.selecionarParcelamento();
     contaReceber.salvar();
@@ -76,12 +70,28 @@ describe("Conta a Receber", () => {
     inventory.validarContaReceber();
   });
 
+  // Na Classe ExcluirProximo pode informar o titulo para ser selecionado.
+  // Excluir Lancamento (Parcelamento)
+  it("Excluir Titulo (Parcelado)", () => {
+    // Act (Agir/Executar)
+    contaReceber.selecionarModuloReceber();
+    contaReceber.paginatorContaReceber();
+
+    // Excluir os proximos e o selecionado
+    contaReceber.excluirProximos("Titulo Teste Parcelado");
+
+    // Assert
+    inventory.validarContaReceber();
+  });
+
+
   it("Observacao no Titulo", () => {
     contaReceber.novoLancamentoReceber();
     contaReceber.incluirTituloObservacao();
 
-    contaReceber.dropdownCategoria("#category", "Categoria Teste");
-    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
+    contaReceber.dropdownCategoria("#category", "Teste CategoriaR");
+    contaReceber.dropdownCategoria("#bankAccount", "Teste Conta Bancaria");
+    contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
 
     contaReceber.observacaoTitulo();
     inventory.validarContaReceber();
@@ -103,7 +113,24 @@ describe("Conta a Receber", () => {
     inventory.validarContaReceber();
   });
 
-  it("Editar descrição", () => {
+  // Incluir Titulo A Pagar
+    it("Incluir Titulo A Receber", () => {
+      // Act (Agir/Executar)
+      contaReceber.novoLancamentoReceber();
+      contaReceber.incluirTitulo();
+  
+      contaReceber.dropdownCategoria("#category", "Teste CategoriaR");
+      contaReceber.dropdownCategoria("#bankAccount", "Teste Conta Bancaria");
+      contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
+  
+      contaReceber.salvar();
+  
+      //Assert (Verificar/Validar)
+      inventory.validarContaReceber();
+    });
+
+
+  it("Editar descrição de lançamento", () => {
     contaReceber.selecionarModuloReceber();
     contaReceber.paginatorContaReceber();
 
@@ -132,13 +159,13 @@ describe("Conta a Receber", () => {
     inventory.validarContaReceber();
   });
 
-  it("Recorrencia Diario", () => {
+  it("Recorrencia Permanente (Diario)", () => {
     contaReceber.novoLancamentoReceber();
     contaReceber.incluirTituloDiario();
 
-    contaReceber.dropdownCategoria("#category", "Categoria Teste");
-    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
-    contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
+    contaReceber.dropdownCategoria("#category", "Teste CategoriaR");
+    contaReceber.dropdownCategoria("#bankAccount", "Teste Conta Bancaria");
+
 
     contaReceber.ativarRecorrencia();
     contaReceber.selecionarFrequencia("Diário");
@@ -147,7 +174,7 @@ describe("Conta a Receber", () => {
     inventory.validarContaReceber();
   });
 
-  it("Excluir Recorrente Diario", () => {
+  it("Excluir Recorrente Permanente (Diario)", () => {
     contaReceber.selecionarModuloReceber();
     contaReceber.paginatorContaReceber();
 
@@ -155,20 +182,20 @@ describe("Conta a Receber", () => {
     inventory.validarContaReceber();
   });
 
-  it("Recorrencia Semanal", () => {
+  it("Recorrencia Permanente (Semanal)", () => {
     contaReceber.novoLancamentoReceber();
     contaReceber.incluirTituloSemanal();
 
-    contaReceber.dropdownCategoria("#category", "Categoria Teste");
-    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
-    contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
+    contaReceber.dropdownCategoria("#category", "Teste CategoriaR");
+    contaReceber.dropdownCategoria("#bankAccount", "Teste Conta Bancaria");
+
 
     contaReceber.ativarRecorrencia();
     contaReceber.selecionarFrequencia("Semanal");
     contaReceber.salvar();
   });
 
-  it("Excluir Recorrente Semanal", () => {
+  it("Excluir Recorrente Permanente (Semanal)", () => {
     contaReceber.selecionarModuloReceber();
     contaReceber.paginatorContaReceber();
 
@@ -176,13 +203,12 @@ describe("Conta a Receber", () => {
     inventory.validarContaReceber();
   });
 
-  it("Recorrencia Anual", () => {
+  it("Recorrencia Permanente (Anual)", () => {
     contaReceber.novoLancamentoReceber();
     contaReceber.incluirTituloAnual();
 
-    contaReceber.dropdownCategoria("#category", "Categoria Teste");
-    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
-    contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
+    contaReceber.dropdownCategoria("#category", "Teste CategoriaR");
+    contaReceber.dropdownCategoria("#bankAccount", "Teste Conta Bancaria");
 
     contaReceber.ativarRecorrencia();
     contaReceber.selecionarFrequencia("Anual");
@@ -191,13 +217,13 @@ describe("Conta a Receber", () => {
     inventory.validarContaReceber();
   });
 
-  it("Recorrencia Mensal", () => {
+  it("Recorrencia Permanente (Mensal)", () => {
     contaReceber.novoLancamentoReceber();
     contaReceber.incluirTituloMensal();
 
-    contaReceber.dropdownCategoria("#category", "Categoria Teste");
-    contaReceber.dropdownCategoria("#bankAccount", "Conta TESTE");
-    contaReceber.dropdownCategoria("#costCenter", "Centro de Custo TESTE");
+    contaReceber.dropdownCategoria("#category", "Teste CategoriaR");
+    contaReceber.dropdownCategoria("#bankAccount", "Teste Conta Bancaria");
+
 
     contaReceber.ativarRecorrencia();
     contaReceber.selecionarFrequencia("Mensal");
@@ -206,7 +232,7 @@ describe("Conta a Receber", () => {
     inventory.validarContaReceber();
   });
 
-  it("Excluir Recorrente Mensal", () => {
+  it("Excluir Titulo (Recorrente Mensal)", () => {
     contaReceber.selecionarModuloReceber();
     contaReceber.SelecionarMes();
     contaReceber.paginatorContaReceber();

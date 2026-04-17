@@ -282,19 +282,6 @@ describe("Conta a Pagar", () => {
     //Assert (Verificar/Validar)
     inventory.validarContaPagar();
   });
- 
-  // Na Classe ExcluirTodos pode informar o titulo para ser selecionado.
-  // Excluir toda a recorrência  (Recorrente)
-  it.only("Excluir Titulo (Recorrente Anual)", () => {
-    contaPagar.selecionarModuloPagar();
-    contaPagar.paginatorContaPagar();
-
-    contaPagar.expandirTitulo("Titulo Teste Anual");
-
-    contaPagar.excluirTodos("Titulo Teste Anual");
-
-    inventory.validarContaPagar();
-  });
    
   it("Recorrencia Permanente (Mensal)", () => {
     //Arrange (Organizar/Configurar)

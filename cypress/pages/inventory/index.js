@@ -95,5 +95,13 @@ validarSobre() {
     cy.visit("https://hmax-api-hub-dev.web.app/#/about");
   }
   
+validarContasBancarias() {
+    cy.visit("https://supergerente.hmax.com.br/#/financeiro/contas-bancaria");
+  }
+
+validarContato() {
+    cy.visit("https://hmax-api-hub-dev.web.app/#/financeiro/contatos");
+}
+
 }
 export default new Inventory();

@@ -1,12 +1,12 @@
 import sistemaGeral from "../../pages/auth/validarModulo";
-import Login from "../../pages/auth/validarModulo";
+import Login from "../../pages/auth/login";
 import inventory from "../../pages/inventory";
 
 describe("Esqueceu Senha", () => {
   // Executa antes de cada teste
   beforeEach(() => {
     cy.viewport(1280, 858);
-    Login.visitarPaginaLogin();
+    Login.visitarPaginaLoginDEV();
     Login.preencherCredenciasValidarDV();
   });
 
