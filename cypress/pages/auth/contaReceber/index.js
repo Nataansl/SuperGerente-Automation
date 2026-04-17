@@ -44,10 +44,10 @@ class ContaReceber {
     cy.get(el.selectCategoriaPai)
       .should("be.visible")
       .clear()
-      .type("Categoria Teste");
+      .type("Teste Categoria");
 
     cy.get("body")
-      .contains(".p-autocomplete-option", "Categoria Teste")
+      .contains(".p-autocomplete-option", "Teste CategoriaR")
       .click();
 
     this.salvar();
@@ -104,7 +104,7 @@ class ContaReceber {
 
   // Criar Centro de Custo
   cadastrarCentroCusto() {
-    cy.get(el.botaoCadastrarCentroCusto).click();
+    cy.get(el.botaoCadastrarCentroCusto).click().t;
 
     cy.get(el.inputNome).type("Centro de Custo TESTE");
 
@@ -125,24 +125,31 @@ class ContaReceber {
 
   // Selecionar MENU
   selecionarModuloReceber() {
-    cy.contains(el.menuFinanceiro, "Financeiro")
+    cy.contains(el.menuFinanceiro, "Financeiro", { timeout: 10000 })
       .closest(".p-panelmenu-header")
       .click();
 
-    cy.contains(el.menuContasReceber).should("be.visible").click();
+    cy.contains(el.menuContasReceber, { timeout: 10000 })
+      .should("be.visible")
+      .click();
   }
 
   paginatorContaReceber() {
-    cy.get(el.paginatorDropdown).click();
+    cy.get(el.paginatorDropdown, { timeout: 10000 }).click();
 
-    cy.get("body").find(el.paginatorOptions).contains("30").click();
+    cy.get("body")
+      .find(el.paginatorOptions)
+      .contains("30", { timeout: 10000 })
+      .click();
   }
 
   // Selecionar Novo Lançamento
   novoLancamentoReceber() {
     this.selecionarModuloReceber();
 
-    cy.contains(el.botaoNovoLancamento).should("be.visible").click();
+    cy.contains(el.botaoNovoLancamento, { timeout: 10000 })
+      .should("be.visible")
+      .click();
   }
 
   salvar() {
@@ -161,7 +168,15 @@ class ContaReceber {
   }
 
   incluirTituloPago() {
-    this.incluirTitulo();
+    const competencia = dataHoje();
+    const vencimento = dataFutura(7);
+
+    cy.get(el.inputDescricao).should("be.visible").type("Titulo Teste Pago");
+    cy.get(el.inputValor).clear().type("260");
+    cy.get(el.inputDataVencimento).clear().type(vencimento);
+    cy.get(el.inputDataCompetencia).clear().type(competencia);
+
+    // Marca como Titulo já pago
     cy.get(el.checkboxPago).check();
   }
 
@@ -179,29 +194,50 @@ class ContaReceber {
     cy.get(el.inputDataCompetencia).clear().type(dataHoje());
   }
 
-  incluirTituloDiario() {
-    cy.get(el.inputDescricao).type("Titulo Teste Diário");
-    cy.get(el.inputValor).clear().type("260");
-    cy.get(el.inputDataVencimento).clear().type(dataFutura(7));
-    cy.get(el.inputDataCompetencia).clear().type(dataHoje());
-    cy.get(el.checkboxPago).check();
-  }
+  // Incluir Titulo Diário
+    incluirTituloDiario() {
+      const competencia = dataHoje();
+      const vencimento = dataFutura(7);
+  
+      cy.get(el.inputDescricao).should("be.visible").type("Titulo Teste Diário");
+      cy.get(el.inputValor).clear().type("260");
+      cy.get(el.inputDataVencimento).clear().type(vencimento);
+      cy.get(el.inputDataCompetencia).clear().type(competencia);
+  
+      // Marca como Titulo já pago
+      cy.get(el.checkboxPago).check();
+    }
 
-  incluirTituloSemanal() {
-    cy.get(el.inputDescricao).type("Titulo Teste Semanal");
-    cy.get(el.inputValor).clear().type("260");
-    cy.get(el.inputDataVencimento).clear().type(dataFutura(7));
-    cy.get(el.inputDataCompetencia).clear().type(dataHoje());
-    cy.get(el.checkboxPago).check();
-  }
+ // Incluir Titulo Semanal
+   incluirTituloSemanal() {
+     const competencia = dataHoje();
+     const vencimento = dataFutura(7); // +7 dias
+ 
+     cy.get(el.inputDescricao).should("be.visible").type("Titulo Teste Semanal");
+ 
+     cy.get(el.inputValor).clear().type("260");
+ 
+     cy.get(el.inputDataVencimento).clear().type(vencimento);
+ 
+     cy.get(el.inputDataCompetencia).clear().type(competencia);
+ 
+     // Marca como Título já pago
+     cy.get(el.checkboxPago).check();
+   }
 
-  incluirTituloMensal() {
-    cy.get(el.inputDescricao).type("Titulo Teste Mensal");
-    cy.get(el.inputValor).clear().type("260");
-    cy.get(el.inputDataVencimento).clear().type(dataFutura(30));
-    cy.get(el.inputDataCompetencia).clear().type(dataHoje());
-    cy.get(el.checkboxPago).check();
-  }
+   // Incluir Titulo Mensal
+    incluirTituloMensal() {
+      const competencia = dataHoje();
+      const vencimento = dataFutura(30); // +30 dias
+  
+      cy.get(el.inputDescricao).should("be.visible").type("Titulo Teste Mensal");
+      cy.get(el.inputValor).clear().type("260");
+      cy.get(el.inputDataVencimento).clear().type(vencimento);
+      cy.get(el.inputDataCompetencia).clear().type(competencia);
+  
+      // Marca como Titulo já pago
+      cy.get(el.checkboxPago).check();
+    }
 
   incluirTituloAnual() {
     const data = new Date();
@@ -260,15 +296,21 @@ class ContaReceber {
     this.salvar();
   }
 
-  editarLancamento(nome, novo) {
-    cy.contains(el.colunaTabela, nome)
+  // Editar Lançamento - Edita a descrição de um lançamento existente baseado no nome informado
+  editarLancamento(descricaoAtual, novaDescricao) {
+    cy.contains(el.colunaTabela, descricaoAtual)
       .parents(el.linhaTabela)
-      .find(el.botaoEditar)
-      .click();
+      .within(() => {
+        cy.get(el.botaoEditar).click();
+      });
 
-    cy.get(el.inputDescricao).clear().type(novo);
+    // Garantir que o modal abriu
+    cy.get(".p-dialog").should("be.visible");
 
-    this.salvar();
+    // Agora o campo fica acessível
+    cy.get(el.inputDescricao).type(novaDescricao);
+
+    cy.contains("button", "Salvar").should("be.visible").click();
   }
 
   excluirLancamento(nome) {
@@ -277,7 +319,7 @@ class ContaReceber {
       .find(el.botaoExcluir)
       .click();
 
-    cy.contains("button", "Confirmar").click();
+    cy.contains("button", "Confirmar").should("not.be.disabled").click();
   }
 
   excluirProximos(nome) {
@@ -288,22 +330,43 @@ class ContaReceber {
   }
 
   excluirTodos(nome) {
-    cy.contains("tr", nome).find(el.iconeTrash).click();
+    // 1. Clica no botão excluir da tabela
+    cy.contains("tr", nome, { timeout: 10000 })
+      .should("be.visible")
+      .within(() => {
+        cy.get(el.iconeTrash).closest("button").click();
+      });
 
-    cy.contains(el.opcaoExcluirTodos).click();
-    cy.contains("button", "Confirmar").click();
+    // 2. Espera modal abrir
+    cy.get(".p-dialog", { timeout: 10000 }).should("be.visible");
+
+    // 3. Clica na opção correta (CARD!)
+    cy.contains("div.font-medium", "Excluir toda a recorrência", {
+      timeout: 10000,
+    })
+      .should("be.visible")
+      .click();
+
+    this.ExcluirTudo();
+
+    this.Confimar();
   }
 
-  // OUTROS
-
+  // Reabre um Titulo previamente fechado/pago
   reabrirTitulo(nome) {
     cy.contains(el.colunaTabela, nome)
-      .parents(el.linhaTabela)
+      .first()
+      .closest(el.linhaTabela)
       .find(el.botaoEditar)
       .click();
 
-    cy.contains("button", "Reabrir Título").click();
+    cy.contains(el.botaoSalvar, "Reabrir Título")
+      .should("not.be.disabled")
+      .click();
+
     cy.get(el.botaoConfirmarOk).click();
+
+    cy.get(el.inputDescricao).type(nome);
 
     this.salvar();
   }
@@ -326,6 +389,24 @@ class ContaReceber {
 
     // depois selecionar mês direto (como no seu HTML)
     cy.get("body").contains(".p-datepicker-month", mes).click({ force: true });
+  }
+
+  // Ação padrão para salvar formulários
+  salvar() {
+    cy.contains("button", "Salvar", { timeout: 10000 })
+      .should("be.visible")
+      .and("not.be.disabled")
+      .click();
+  }
+
+  // Acão padrão para Confirmar
+  Confimar() {
+    cy.contains(el.Confirmar, "Confirmar").should("not.be.disabled").click();
+  }
+
+  // Ação de Excluir Titulo (Recorrente)
+  ExcluirTudo() {
+    cy.contains(el.Confirmar, "Excluir Tudo").should("not.be.disabled").click();
   }
 }
 

@@ -11,7 +11,7 @@ class ValidarModulos {
       .should("be.visible")
       .click();
 
-    cy.contains(".p-panelmenu-item-label", "Home", { timeout: 10000 })
+    cy.contains(".p-panelmenu-header-label", "Home", { timeout: 10000 })
       .should("be.visible")
       .click();
   }
@@ -20,7 +20,7 @@ class ValidarModulos {
       .should("be.visible")
       .click();
 
-    cy.contains(".p-panelmenu-item-label", "Resultados", { timeout: 10000 })
+    cy.contains(".p-panelmenu-header-label", "Resultados", { timeout: 10000 })
       .should("be.visible")
       .click();
   }
@@ -29,7 +29,7 @@ class ValidarModulos {
       .should("be.visible")
       .click();
 
-    cy.contains(".p-panelmenu-item-label", "Tarifa Média", { timeout: 10000 })
+    cy.contains(".p-panelmenu-header-label", "Tarifa Média", { timeout: 10000 })
       .should("be.visible")
       .click();
   }
@@ -38,7 +38,7 @@ class ValidarModulos {
       .should("be.visible")
       .click();
 
-    cy.contains(".p-panelmenu-item-label", "Receitas", { timeout: 10000 })
+    cy.contains(".p-panelmenu-header-label", "Receitas", { timeout: 10000 })
       .should("be.visible")
       .click();
   }
@@ -47,7 +47,7 @@ class ValidarModulos {
       .should("be.visible")
       .click();
 
-    cy.contains(".p-panelmenu-item-label", "Despesas", { timeout: 10000 })
+    cy.contains(".p-panelmenu-header-label", "Despesas", { timeout: 10000 })
       .should("be.visible")
       .click();
   }
@@ -56,7 +56,7 @@ class ValidarModulos {
       .should("be.visible")
       .click();
 
-    cy.contains(".p-panelmenu-item-label", "Revenue", { timeout: 10000 })
+    cy.contains(".p-panelmenu-header-label", "Revenue", { timeout: 10000 })
       .should("be.visible")
       .click();
   }
@@ -65,7 +65,7 @@ class ValidarModulos {
       .should("be.visible")
       .click();
 
-    cy.contains(".p-panelmenu-item-label", "Parceiros", { timeout: 10000 })
+    cy.contains(".p-panelmenu-header-label", "Parceiros", { timeout: 10000 })
       .should("be.visible")
       .click();
   }
@@ -74,7 +74,7 @@ class ValidarModulos {
       .should("be.visible")
       .click();
 
-    cy.contains(".p-panelmenu-item-label", "Usuários", { timeout: 10000 })
+    cy.contains(".p-panelmenu-header-label", "Usuários", { timeout: 10000 })
       .should("be.visible")
       .click();
   }
@@ -83,7 +83,7 @@ class ValidarModulos {
       .should("be.visible")
       .click();
 
-    cy.contains(".p-panelmenu-item-label", "Disponibilidade", {
+    cy.contains(".p-panelmenu-header-label", "Disponibilidade", {
       timeout: 10000,
     })
       .should("be.visible")
@@ -94,7 +94,7 @@ class ValidarModulos {
       .should("be.visible")
       .click();
 
-    cy.contains(".p-panelmenu-item-label", "Tipos de Apartamento", {
+    cy.contains(".p-panelmenu-header-label", "Tipos de Apartamento", {
       timeout: 10000,
     })
       .should("be.visible")
@@ -105,7 +105,7 @@ class ValidarModulos {
       .should("be.visible")
       .click();
 
-    cy.contains(".p-panelmenu-item-label", "Agentes", { timeout: 10000 })
+    cy.contains(".p-panelmenu-header-label", "Agentes", { timeout: 10000 })
       .should("be.visible")
       .click();
   }
@@ -114,7 +114,7 @@ class ValidarModulos {
       .should("be.visible")
       .click();
 
-    cy.contains(".p-panelmenu-item-label", "Plano de Conta", { timeout: 10000 })
+    cy.contains(".p-panelmenu-header-label", "Plano de Conta", { timeout: 10000 })
       .should("be.visible")
       .click();
   }
@@ -123,7 +123,7 @@ class ValidarModulos {
       .should("be.visible")
       .click();
 
-    cy.contains(".p-panelmenu-item-label", "Apartamentos", { timeout: 10000 })
+    cy.contains(".p-panelmenu-header-label", "Apartamentos", { timeout: 10000 })
       .should("be.visible")
       .click();
   }
@@ -132,10 +132,10 @@ class ValidarModulos {
       .should("be.visible")
       .click();
 
-    cy.contains(".p-panelmenu-item-label", "Sobre", { timeout: 10000 })
+    cy.contains(".p-panelmenu-header-label", "Sobre", { timeout: 10000 })
       .should("be.visible")
       .click();
   }
 }
 
-export default new SistemaGeral();
+export default new ValidarModulos();

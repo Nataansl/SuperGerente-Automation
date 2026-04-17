@@ -69,6 +69,17 @@ class Categoria {
     this.salvar();
   }
 
+  // Nova Categoria
+  // No campo .type pode informar o nome da categoria.
+  novaCategoriaReceita() {
+    cy.contains(el.botaoAdicionarCategoria, { timeout: 10000 }).click();
+
+    cy.get(el.inputDescricao).should("be.visible").type("Categoria Teste");
+
+    this.salvar();
+  }
+
+
   // Define a quantidade de registros exibidos na tabela
   paginatorCategoria() {
     cy.get(el.paginatorDropdown, { timeout: 10000 }).click();

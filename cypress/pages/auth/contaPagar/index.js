@@ -31,22 +31,6 @@ class ContaPagar {
     cy.visit(el.urlDV);
   }
 
-  selecionarPeriodo(mes, ano) {
-    // 1. Abrir o calendário (usa first por causa do ID duplicado)
-    cy.get("#icondisplay").first().click();
-
-    // 2. Espera o painel abrir
-    cy.get(".p-datepicker-panel").should("be.visible");
-
-    // 3. Ajustar o ano
-    cy.get(".p-datepicker-title").contains(ano).should("be.visible");
-
-    // Se precisar navegar ano (ex: próximo)
-    // cy.get('[aria-label="Next Year"]').click();
-
-    // 4. Selecionar o mês
-    cy.contains(".p-datepicker-month", mes).should("be.visible").click();
-  }
 
   // Seleciona a propriedade produção
   selecionarPropriedade() {
@@ -571,6 +555,7 @@ class ContaPagar {
     cy.contains(el.Confirmar, "Confirmar").should("not.be.disabled").click();
   }
 
+  // Ação de Excluir Titulo (Recorrente) 
   ExcluirTudo() {
     cy.contains(el.Confirmar, "Excluir Tudo").should("not.be.disabled").click();
   }
