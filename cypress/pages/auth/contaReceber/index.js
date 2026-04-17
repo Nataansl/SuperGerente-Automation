@@ -352,8 +352,7 @@ class ContaReceber {
     this.Confimar();
   }
 
-  // OUTROS
-
+  // Reabre um Titulo previamente fechado/pago
   reabrirTitulo(nome) {
     cy.contains(el.colunaTabela, nome)
       .first()
