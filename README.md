@@ -52,7 +52,11 @@ cypress/
 ## ⚙️ Clone o repositório:
 
 ```
+<<<<<<< HEAD
 git clone https://github.com/hmaxsoftware/hmax-tester.git
+=======
+git clone https://github.com/Nataansl/SuperGerente-Automation.git
+>>>>>>> cc0dcf424c69ddd0dc96e8891e3b316c62d2e5f1
 ```
 
 ---
@@ -128,6 +132,7 @@ cypress/reports/
 * Organização escalável
 
 ---
+<<<<<<< HEAD
 
 ## 👨‍💻 Autor
 
@@ -135,3 +140,5 @@ Desenvolvido por Natan
 🔗 https://github.com/Nataansl
 
 ---
+=======
+>>>>>>> cc0dcf424c69ddd0dc96e8891e3b316c62d2e5f1
