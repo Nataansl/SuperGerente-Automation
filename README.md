@@ -52,7 +52,7 @@ cypress/
 ## ⚙️ Clone o repositório:
 
 ```
-git clone https://github.com/hmaxsoftware/hmax-tester.git
+git clone https://github.com/Nataansl/SuperGerente-Automation.git
 ```
 
 ---
