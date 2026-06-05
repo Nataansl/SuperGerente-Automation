@@ -2,7 +2,7 @@
   <img src="https://hmax-public-images.storage.googleapis.com/logo/logo-flat.png" alt="HMAX Logo" width="200"/>
 </p>
 
-# 🚀 SuperGerente - Testes E2E com Cypress
+# SuperGerente - Testes E2E com Cypress
 
 Projeto de automação de testes End-to-End utilizando Cypress para validação das funcionalidades do sistema SuperGerente, com foco nos módulos de autenticação, financeiro e sistema.
 
